@@ -1,0 +1,15 @@
+{
+    "mcpServers": {
+        "patent-agent": {
+            "command": "python",
+            "args": [
+                "-m",
+                "patent_agent.mcp_server"
+            ],
+            "env": {
+                "OPENAI_API_KEY": "sk-...",
+                "GOOGLE_API_KEY": "..."
+            }
+        }
+    }
+}

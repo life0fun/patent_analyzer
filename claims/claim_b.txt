@@ -1,0 +1,6 @@
+1. A method for operating a drone, comprising:
+receiving a command signal from a user device;
+determining a destination based on the command signal;
+detecting an obstacle in a projected path;
+computing an alternative route to the destination; and
+controlling a propulsion system to move the drone along the alternative route.

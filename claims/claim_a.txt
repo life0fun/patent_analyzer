@@ -1,0 +1,5 @@
+1. A method for controlling an unmanned aerial vehicle (UAV), comprising:
+receiving a first signal from a remote controller;
+identifying a target location based on the first signal;
+calculating a flight path to the target location; and
+actuating a motor to propel the UAV along the flight path.
