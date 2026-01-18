@@ -1,5 +1,5 @@
-from typing import Any, Dict, List, Optional, Protocol
-from mcp_client import MCPClient
+from typing import Any, Dict, List, Optional
+from .mcp_client import MCPClient
 
 class ToolResult:
     def __init__(self, output: str, is_error: bool = False):

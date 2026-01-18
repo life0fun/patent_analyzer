@@ -1,1 +1,0 @@
-A drone with a sensor.

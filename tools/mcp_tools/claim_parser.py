@@ -87,5 +87,4 @@ class LLMClaimParser:
             # Fallback if JSON parsing fails
             return [line.strip() for line in response_text.splitlines() if line.strip()]
 
-    # Mock response logic moved to LLMClient
 

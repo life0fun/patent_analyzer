@@ -1,7 +1,8 @@
 import asyncio
 import argparse
 from typing import Dict, Any
-from patent_agents import MasterAgent, McpAgent
+from master_agent import MasterAgent
+from subagents.mcp_agent import McpAgent
 from agents import function_tool
 
 async def main():
@@ -25,7 +26,6 @@ async def main():
     print(f"User Query: \"{user_query}\"")
     print("-" * 50)
     
-    # 1. Initialize Agents
     mcp_agent = McpAgent()
     mcp_tools_descriptions = await mcp_agent.get_tools_descriptions()
 
