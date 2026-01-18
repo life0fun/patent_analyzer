@@ -1,5 +1,5 @@
-from claim_parser import LLMClaimParser, RuleBasedClaimParser
-from comparator import FeatureComparator, LLMFeatureComparator
+from .claim_parser import LLMClaimParser, RuleBasedClaimParser
+from .feature_comparator import FeatureComparator, LLMFeatureComparator
 
 class ClaimAnalyzer:
     """

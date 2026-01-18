@@ -7,7 +7,7 @@ from starlette.routing import Route, Mount
 from mcp.server.sse import SseServerTransport
 from mcp.server import Server
 from mcp.types import Tool, TextContent, ImageContent, EmbeddedResource
-from claim_analyzer import ClaimAnalyzer
+from tools.mcp_tools.claim_analyzer import ClaimAnalyzer
 
 server = Server("LLM Patent Analyzer")
 claim_analyzer = ClaimAnalyzer()
