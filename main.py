@@ -1,10 +1,11 @@
+import json
 import asyncio
 import argparse
 from typing import Dict, Any
+from agents import OpenAIConversationsSession
 from master_agent import MasterAgent
-from subagents.mcp_agent import McpAgent
-from agents import function_tool
 from subagents.mcp_client import MCPClient
+from subagents.mcp_agent import McpAgent
 
 async def main():
     # Parse Command Line Arguments
@@ -27,41 +28,35 @@ async def main():
     print(f"User Query: \"{user_query}\"")
     print("-" * 50)
     
-    # Initialize MCP Client and fetch tools first
+    # Initialize Agents
     mcp_client = MCPClient()
     mcp_agent = await McpAgent.create(mcp_client)
     mcp_tools_descriptions = await mcp_agent.get_tools_descriptions()
 
-    @function_tool(name_override="task_tool", description_override="Delegates a specific task to the MCP worker agent.", strict_mode=False)
-    async def task_tool(task: str, context: Dict[str, Any]):
-        """
-        Delegates a task to the mcp_agent.
-        :param task: A detailed description of the patent analysis task to perform.
-        :param context: Dictionary containing relevant data (e.g., 'claim_a', 'claim_b').
-        """
-        print(f"Orchestrator: TaskTool invoked to switch to subagent. '{task}'")
-        result = await mcp_agent.execute_task(task, context)
-        if not result.is_error:
-            return result.output
-        else:
-            return f"McpAgent Error: {result.output}"
-
-    master_agent = MasterAgent(tools=[task_tool], mcp_tools_descriptions=mcp_tools_descriptions)
+    # Create MasterAgent with task_tool registered
+    master_agent = MasterAgent(
+        mcp_tools_descriptions=mcp_tools_descriptions,
+        mcp_agent=mcp_agent
+    )
         
     context = {
         "claim_a": claim_a_text,
         "claim_b": claim_b_text
     }
     
-    # 2. Execute
-    print("Orchestrator: Requesting plan from MasterAgent...")
-    final_answer = await master_agent.run(user_query, context)
+    # Prepare input
+    user_input = f"User Request: {user_query}\n\nContext:\n{json.dumps(context, indent=2)}"
+    session = OpenAIConversationsSession()
     
-    # 3. Final Output
+    # Run the master agent - it handles the Think-Act-Observation loop internally
+    print("\Main: Running MasterAgent (with internal Think-Act loop)...")
+    result = await master_agent.run(user_input, session=session)
+    
+    # Display final result
     print("\n" + "="*40)
-    print("FINAL ANSWER:")
+    print("FINAL RESULT:")
     print("="*40)
-    print(final_answer)
-
+    print(result)
+        
 if __name__ == "__main__":
     asyncio.run(main())

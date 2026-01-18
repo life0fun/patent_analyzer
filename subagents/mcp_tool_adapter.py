@@ -59,9 +59,9 @@ def adapt_mcp_tool(mcp_tool_name: str, mcp_tool_description: str, mcp_tool_schem
                      # print(f"DEBUG: Could not map args. clean_args={clean_args}")
                      pass
         
-        # print(f"DEBUG: Calling executor with tool_input: {tool_input}")
+        print(f"DEBUG: Calling executor with tool name: {mcp_tool_name}, tool_input: {tool_input}")
         result = await executor(mcp_tool_name, tool_input)
-        # print(f"DEBUG: dynamic_tool_handler result: {result}")
+        print(f"DEBUG: dynamic_tool_handler result: {result}")
         return str(result)
 
     # Sanitize schema for Agent compatibility

@@ -37,7 +37,8 @@ class McpAgent:
             
         self.agent = Agent(
             name="McpAgent",
-            instructions="You are a patent analysis assistant. You have access to tools to compare claims, extract features, etc. Use them to answer the user's request. Always output the result of the tool call.",
+            instructions=f"""You are a patent analysis assistant. You have access to tools to compare claims, 
+            extract features, etc. Use them to answer the user's request. Always output the result of the tool call.""",
             model="gpt-4o",
             tools=converted_tools
         )
