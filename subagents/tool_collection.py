@@ -15,36 +15,13 @@ class ToolFailure(ToolResult):
 
 class MCPToolsCollection:
     """
-    Encapsulates a collection of MCP tools and provides a structured execution interface.
+    Encapsulates a collection of MCP tools.
     """
-    def __init__(self, mcp_client: MCPClient):
-        self.mcp_client = mcp_client
-        self._tool_map = {}
-
-    async def list_tools(self) -> List[Any]:
-        """
-        Fetch and cache tools from the MCP server.
-        """
-        tools = await self.mcp_client.list_tools()
+    def __init__(self, tools: List[Any]):
         self._tool_map = {tool.name: tool for tool in tools}
-        return tools
 
-    async def execute(
-        self, name: str, tool_input: Optional[Dict[str, Any]] = None
-    ) -> ToolResult:
-        """
-        Executes a tool by name with the provided input.
-        """
-        if not self._tool_map:
-            # Auto-populate tool map if empty
-            await self.list_tools()
+    def get_tool(self, name: str) -> Optional[Any]:
+        return self._tool_map.get(name)
 
-        if name not in self._tool_map:
-            return ToolFailure(error=f"Tool {name} is invalid")
-
-        try:
-            # Use the generic execute method of the mpc_client
-            result_text = await self.mcp_client.execute(name, tool_input or {})
-            return ToolResult(output=result_text)
-        except Exception as e:
-            return ToolFailure(error=f"Error executing tool {name}: {e}")
+    def __iter__(self):
+        return iter(self._tool_map.values())

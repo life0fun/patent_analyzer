@@ -3,84 +3,73 @@ from agents import Agent, Runner, function_tool
 import json
 from .tool_collection import MCPToolsCollection, ToolResult
 from .mcp_client import MCPClient
+from .mcp_tool_adapter import adapt_mcp_tool
 
 class McpAgent:
     """
     Subagent that wraps the MCP client and handles tool execution via semantic matching.
     """
-    def __init__(self):
-        self.mcp_client = MCPClient()
-        self.mcp_tools_collection = MCPToolsCollection(self.mcp_client)
+    @classmethod
+    async def create(cls, mcp_client: MCPClient):
+        """
+        Async factory method to create and initialize McpAgent.
+        """
+        mcp_tools = await mcp_client.list_tools()
+        return cls(mcp_client, mcp_tools)
+
+    def __init__(self, mcp_client: MCPClient, mcp_tools: List[Any]):
+        self.mcp_client = mcp_client
+        self.mcp_tools_collection = MCPToolsCollection(mcp_tools)
+        
+        # Initialize the internal Agent immediately
+        converted_tools = []
+        
+        for tool in mcp_tools:
+            # Assuming tool.inputSchema is the dict we need
+            # If tool.inputSchema is a string, we might need to parse it, but usually it's a dict in MCP SDK
+            adapted = adapt_mcp_tool(
+                mcp_tool_name=tool.name,
+                mcp_tool_description=tool.description,
+                mcp_tool_schema=tool.inputSchema,
+                executor=self.mcp_client.execute # Use client execute loop directly
+            )
+            converted_tools.append(adapted)
+            
         self.agent = Agent(
             name="McpAgent",
-            instructions="You are a tool selection specialist for a patent agent system. Based on the task and context, choose the BEST tool and provide the arguments.",
-            model="gpt-4o"
+            instructions="You are a patent analysis assistant. You have access to tools to compare claims, extract features, etc. Use them to answer the user's request. Always output the result of the tool call.",
+            model="gpt-4o",
+            tools=converted_tools
         )
+        print(f"McpAgent initialized with {len(converted_tools)} tools.")
 
-    async def list_tools(self):
-        return await self.mcp_tools_collection.list_tools()
+    async def execute_task(self, task_description: str, context: Dict[str, str]) -> ToolResult:
+        """
+        Executes the task using the native tool-enabled Agent.
+        """
+        print(f"McpAgent: execute_task: '{task_description}'")
+        
+        prompt = f"""
+        Task: {task_description}
+        
+        Context:
+        {json.dumps(context, indent=2)}
+        """
+        
+        # Runner.run should handle tool calls automatically if tools are configured
+        result = await Runner.run(self.agent, prompt)
+        
+        # return the final output
+        return ToolResult(output=result.final_output)
 
     async def get_tools_descriptions(self) -> str:
         """
-        Returns a brief description of the subagent's capabilities (list of tool names or short descriptions).
+        Returns a brief description of the subagent's capabilities.
         """
         try:
-            tools = await self.list_tools()
             capabilities = "The Patent Subagent can perform the following tasks:\n"
-            for tool in tools:
-                capabilities += f"- {tool.name}\n"
+            for tool in self.mcp_tools_collection:
+                capabilities += f"- {tool.name}: {tool.description}\n"
             return capabilities
         except Exception as e:
             return f"Error fetching capabilities: {e}"
-
-    async def execute_with_semantic_matching(self, task_description: str, context: Dict[str, str]) -> ToolResult:
-        """
-        Uses LLM to find the best tool for the task and executes it.
-        """
-        print(f"McpAgent: Analyzing task for semantic matching: '{task_description}'")
-        
-        try:
-            tools = await self.list_tools()
-            tools_info = ""
-            for tool in tools:
-                tools_info += f"- {tool.name}: {tool.description}. Input Schema: {tool.inputSchema}\n"
-        except Exception as e:
-            return ToolResult(output=f"Error fetching tools: {e}", is_error=True)
-
-        prompt = f"""
-        Task to perform: {task_description}
-        
-        Available Tools:
-        {tools_info}
-        
-        Context Data (Variables you can use to fill arguments):
-        {json.dumps(context, indent=2)}
-        
-        Return ONLY a JSON object: {{"tool": "tool_name", "arguments": {{...}}}}
-        """
-        
-        result = await Runner.run(self.agent, prompt)
-        decision_text = result.final_output
-        
-        # Handle potential markdown wrapping
-        cleaned_text = decision_text.strip()
-        if cleaned_text.startswith("```"):
-            lines = cleaned_text.splitlines()
-            if lines[0].startswith("```"):
-                lines = lines[1:]
-            if lines and lines[-1].startswith("```"):
-                lines = lines[:-1]
-            cleaned_text = "\n".join(lines).strip()
-
-        try:
-            decision = json.loads(cleaned_text)
-            tool_name = decision.get("tool")
-            arguments = decision.get("arguments", {})
-            
-            if tool_name:
-                print(f"McpAgent: Semantic matching selected tool `{tool_name}`. Executing...")
-                return await self.mcp_tools_collection.execute(tool_name, arguments)
-            else:
-                return ToolResult(output="No tool selected by semantic matching.", is_error=True)
-        except json.JSONDecodeError:
-            return ToolResult(output=f"Failed to parse tool selection: {decision_text}", is_error=True)

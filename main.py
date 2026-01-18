@@ -4,6 +4,7 @@ from typing import Dict, Any
 from master_agent import MasterAgent
 from subagents.mcp_agent import McpAgent
 from agents import function_tool
+from subagents.mcp_client import MCPClient
 
 async def main():
     # Parse Command Line Arguments
@@ -26,7 +27,9 @@ async def main():
     print(f"User Query: \"{user_query}\"")
     print("-" * 50)
     
-    mcp_agent = McpAgent()
+    # Initialize MCP Client and fetch tools first
+    mcp_client = MCPClient()
+    mcp_agent = await McpAgent.create(mcp_client)
     mcp_tools_descriptions = await mcp_agent.get_tools_descriptions()
 
     @function_tool(name_override="task_tool", description_override="Delegates a specific task to the MCP worker agent.", strict_mode=False)
@@ -36,8 +39,8 @@ async def main():
         :param task: A detailed description of the patent analysis task to perform.
         :param context: Dictionary containing relevant data (e.g., 'claim_a', 'claim_b').
         """
-        print(f"Orchestrator: Delegating task to McpAgent: '{task}'")
-        result = await mcp_agent.execute_with_semantic_matching(task, context)
+        print(f"Orchestrator: TaskTool invoked to switch to subagent. '{task}'")
+        result = await mcp_agent.execute_task(task, context)
         if not result.is_error:
             return result.output
         else:

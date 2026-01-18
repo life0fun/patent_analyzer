@@ -90,7 +90,7 @@ async def handle_call_tool(name: str, arguments: dict | None) -> list[TextConten
         try:
             feats_a = parse_features(arguments.get("features_a", []))
             feats_b = parse_features(arguments.get("features_b", []))
-            result = await claim_analyzer.comparator.compare(feats_a, feats_b)
+            result = await claim_analyzer.feature_comparator.compare(feats_a, feats_b)
             return [TextContent(type="text", text=json.dumps(result, indent=2))]
         except Exception as e:
             return [TextContent(type="text", text=f"Error parsing features: {e}")]
