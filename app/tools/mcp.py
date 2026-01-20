@@ -25,7 +25,7 @@ class MCPClientTool(BaseTool):
             return ToolResult(error="Not connected to MCP server")
 
         try:
-            logger.info(f"Executing tool: {self.original_name}")
+            logger.info(f"MCP client session call_tool on MCP server: {self.original_name}")
             result = await self.session.call_tool(self.original_name, kwargs)
             content_str = ", ".join(
                 item.text for item in result.content if isinstance(item, TextContent)

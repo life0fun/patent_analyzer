@@ -35,7 +35,6 @@ async def main():
     
     # Prepare input
     user_input = f"User Request: {user_query}\n\nContext:\n{json.dumps(context, indent=2)}"
-    session = OpenAIConversationsSession()
 
     # Create MasterAgent with task_tool registered
     master_agent = await MasterAgent.create()

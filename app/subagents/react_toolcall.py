@@ -103,7 +103,7 @@ class ToolCallAgent(ReActAgent):
         self.tool_calls = tool_calls = (
             response.tool_calls if response and response.tool_calls else []
         )
-        content = response.content if response and response.content else ""
+        content = response.content if response and response.content else "empty response.content in tool call mode"
 
         # Log response info
         logger.info(f"✨ {self.name}'s thoughts: {content}")
@@ -205,7 +205,7 @@ class ToolCallAgent(ReActAgent):
             args = json.loads(command.function.arguments or "{}")
 
             # Execute the tool
-            logger.info(f"🔧 Activating tool: '{name}'...")
+            logger.info(f"🔧 {self.name} Activating tool: '{name}'...")
             result = await self.available_tools.execute(name=name, tool_input=args)
 
             # Handle special tools

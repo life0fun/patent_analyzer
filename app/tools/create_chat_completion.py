@@ -1,10 +1,11 @@
 from typing import Any, List, Optional, Type, Union, get_args, get_origin
 
 from pydantic import BaseModel, Field
-
+from app.logger import logger
 from app.tools import BaseTool
 
-
+# A tool that LLM calls to format its response and indicate the task is done 
+# hence terminate the interaction.
 class CreateChatCompletion(BaseTool):
     name: str = "create_chat_completion"
     description: str = (
@@ -151,6 +152,7 @@ class CreateChatCompletion(BaseTool):
             required_field = "response"
             result = kwargs.get(required_field, "")
 
+        logger.info(f"{self.name} tool execute with required {required} and Result: {result}")
         # Type conversion logic
         if self.response_type == str:
             return result

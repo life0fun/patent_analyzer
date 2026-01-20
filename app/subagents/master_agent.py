@@ -22,7 +22,7 @@ class MasterAgent(ToolCallAgent):
     next_step_prompt: str = NEXT_STEP_PROMPT
 
     max_observe: int = 10000
-    max_steps: int = 20
+    max_steps: int = 2
     _initialized: bool = False  # async wait for dependencies to be initialized
 
     @classmethod
@@ -41,7 +41,7 @@ class MasterAgent(ToolCallAgent):
         )
 
         instance.subagents = {
-            "mcp_agent": mcp_agent,
+            "McpAgent": mcp_agent,
         }
 
         # create delegation tool.
@@ -49,7 +49,7 @@ class MasterAgent(ToolCallAgent):
             subagents=instance.subagents
         )
 
-        # Add delegation tool to available tools.
+        # MasterAgent does not know MCP tools, only knows delegation tool
         instance.available_tools.add_tool(subagent_task_tool)
 
         instance._initialized = True

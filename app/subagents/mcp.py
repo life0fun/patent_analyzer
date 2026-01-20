@@ -18,7 +18,7 @@ class MCPAgent(ToolCallAgent):
     and makes the server's tools available through the agent's tool interface.
     """
 
-    name: str = "mcp_agent"
+    name: str = "McpAgent"
     description: str = "An agent that connects to Patent comparison MCP server and uses its tools for patent analyze and comparison."
 
     system_prompt: str = SYSTEM_PROMPT
@@ -28,7 +28,7 @@ class MCPAgent(ToolCallAgent):
     mcp_clients: MCPClients = Field(default_factory=MCPClients)
     available_tools: MCPClients = None  # Will be set in initialize()
 
-    max_steps: int = 20
+    max_steps: int = 5   # MCP subagent shall just execute single tool call per master delegation..
     connection_type: str = "sse"  # "stdio" or "sse"
 
     # Track tool schemas to detect changes
@@ -68,7 +68,7 @@ class MCPAgent(ToolCallAgent):
         else:
             raise ValueError(f"Unsupported connection type: {self.connection_type}")
 
-        # Set available_tools to our MCP instance
+        # Set available_tools to our MCP instance, available_tools will be added to llm call tools parameter.
         self.available_tools = self.mcp_clients
 
         # Store initial tool schemas
