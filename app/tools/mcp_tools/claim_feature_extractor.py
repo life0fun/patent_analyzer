@@ -2,10 +2,11 @@ from typing import List
 import json
 import re
 from agents import Agent, Runner
+from app.prompt.claim_feature_extract import SYSTEM_PROMPT, INSTRUCTIONS
 
-class RuleBasedClaimParser:
+class RuleBasedClaimFeatureExtractor:
     """
-    Parses patent claims to extract individual features/limitations using rule-based splitting.
+    Parses patent claims to extract features/limitations using rule-based splitting.
     """
 
     def __init__(self):
@@ -44,15 +45,15 @@ class RuleBasedClaimParser:
         return features
 
 
-class LLMClaimParser:
+class LLMClaimFeatureExtractor:
     """
     Parses patent claims using an LLM to extract features.
     """
     
     def __init__(self):
         self.agent = Agent(
-            name="ClaimParser",
-            instructions="You are an expert patent agent. Your task is to extract the independent features (limitations) from the patent claim provided.",
+            name="ClaimFeatureExtractor",
+            instructions=SYSTEM_PROMPT,
             model="gpt-4o"
         )
 
@@ -60,17 +61,7 @@ class LLMClaimParser:
         """
         Uses an LLM to extract features from the claim text.
         """
-        prompt = f"""
-        Extract the independent features (limitations) from the following patent claim.
-        Return the result as a raw JSON list of strings. Each string should be a distinct feature.
-        Do not include the preamble or the transition phrase in the list unless it contains a limitation.
-        Normalize the text (remove numbering like '1.', 'a)', etc.).
-
-        Claim:
-        {claim_text}
-        
-        JSON Output:
-        """
+        prompt = INSTRUCTIONS.format(claim_text=claim_text)
         
         result = await Runner.run(self.agent, prompt)
         response_text = result.final_output
@@ -88,3 +79,23 @@ class LLMClaimParser:
             return [line.strip() for line in response_text.splitlines() if line.strip()]
 
 
+if __name__ == "__main__":
+    import sys
+    import asyncio
+    
+    if len(sys.argv) < 2:
+        print("Usage: python claim_parser.py <claim_file>")
+        sys.exit(1)
+    
+    # Read claim text from file
+    claim_file = sys.argv[1]
+    with open(claim_file, 'r') as f:
+        claim_text = f.read()
+    
+    # Parse the claim using rule-based parser
+    parser = LLMClaimFeatureExtractor()
+    features = asyncio.run(parser.extract_features(claim_text))
+    
+    print("Extracted Features:")
+    for i, feature in enumerate(features, 1):
+        print(f"{i}. {feature}")

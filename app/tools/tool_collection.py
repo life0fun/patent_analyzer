@@ -2,7 +2,7 @@
 from typing import Any, Dict, List
 
 from app.logger import logger
-from app.tools.base import BaseTool, ToolFailure, ToolResult
+from app.tools.base import BaseTool, ToolFailure, ToolResult, ToolError
 
 
 class ToolCollection:

@@ -4,7 +4,7 @@ from pydantic import Field
 
 from app.subagents.react_toolcall import ToolCallAgent
 from app.logger import logger
-from app.prompt.mcp import MULTIMEDIA_RESPONSE_PROMPT, NEXT_STEP_PROMPT, SYSTEM_PROMPT
+from app.prompt.mcp import NEXT_STEP_PROMPT, SYSTEM_PROMPT
 from app.schema import AgentState, Message
 from app.tools.base import ToolResult
 from app.tools.mcp import MCPClients

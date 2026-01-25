@@ -1,0 +1,26 @@
+# Patent Claim Comparison Report
+
+## Similarities
+- Both claims involve receiving a signal to determine a target or destination.
+- Both claims involve controlling a propulsion system to move the UAV/drone.
+
+## Differences
+- **Signal Source:**
+  - Claim A: Remote controller
+  - Claim B: User device
+
+- **Target/Destination Identification:**
+  - Claim A: Identifies a target location
+  - Claim B: Determines a destination
+
+- **Path Calculation:**
+  - Claim A: Calculates a flight path
+  - Claim B: Computes an alternative route after obstacle detection
+
+- **Obstacle Detection:**
+  - Claim A: No mention of obstacle detection
+  - Claim B: Detects an obstacle in a projected path
+
+- **Actuation/Control:**
+  - Claim A: Actuates a motor
+  - Claim B: Controls a propulsion system

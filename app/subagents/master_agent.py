@@ -1,10 +1,11 @@
 import json
 from typing import Any, Dict, Optional, List
+from pydantic import Field, model_validator
 from agents import Agent, Runner, function_tool
 from app.config import config
 from app.logger import logger
 from app.prompt.master import NEXT_STEP_PROMPT, SYSTEM_PROMPT
-from app.tools import Terminate, ToolCollection
+from app.tools import Terminate, ToolCollection, StrReplaceEditor
 from app.subagents.react_toolcall import ToolCallAgent
 from app.subagents.mcp import MCPAgent
 from app.subagents.capability import AgentCapability
@@ -18,8 +19,16 @@ class MasterAgent(ToolCallAgent):
     name: str = "MasterAgent"
     description: str = "A patent analysis agent that can solve various tasks using multiple tools including MCP-based tools"
 
-    system_prompt: str = SYSTEM_PROMPT.format(directory=config.workspace_root)
+    system_prompt: str = SYSTEM_PROMPT.format(directory=config.root_path)
     next_step_prompt: str = NEXT_STEP_PROMPT
+
+    # Add general-purpose tools to the tool collection
+    available_tools: ToolCollection = Field(
+        default_factory=lambda: ToolCollection(
+            StrReplaceEditor(),
+            Terminate(),
+        )
+    )
 
     max_observe: int = 10000
     max_steps: int = 2

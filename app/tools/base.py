@@ -35,6 +35,12 @@ from app.utils.logger import logger
 #         }
 
 
+class ToolError(Exception):
+    """Raised when a tool encounters an error."""
+
+    def __init__(self, message):
+        self.message = message
+
 class ToolResult(BaseModel):
     """Represents the result of a tool execution."""
 

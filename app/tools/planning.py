@@ -1,7 +1,7 @@
 # app/tools/planning.py
 from typing import Dict, List, Literal, Optional
 
-from app.tools.base import BaseTool, ToolResult
+from app.tools.base import BaseTool, ToolError, ToolResult
 
 
 _PLANNING_TOOL_DESCRIPTION = """

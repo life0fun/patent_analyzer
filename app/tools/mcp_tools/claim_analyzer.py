@@ -1,4 +1,4 @@
-from .claim_parser import LLMClaimParser, RuleBasedClaimParser
+from .claim_feature_extractor import LLMClaimFeatureExtractor, RuleBasedClaimFeatureExtractor
 from .feature_comparator import FeatureComparator, LLMFeatureComparator
 
 class ClaimAnalyzer:
@@ -8,9 +8,9 @@ class ClaimAnalyzer:
     
     def __init__(self, parser_type: str = "llm", comparator_type: str = "llm"):
         if parser_type == "llm":
-            self.claim_parser = LLMClaimParser()
+            self.claim_feature_extractor = LLMClaimFeatureExtractor()
         else:
-            self.claim_parser = RuleBasedClaimParser()
+            self.claim_feature_extractor = RuleBasedClaimFeatureExtractor()
         
         if comparator_type == "llm":
             self.feature_comparator = LLMFeatureComparator()
@@ -21,8 +21,8 @@ class ClaimAnalyzer:
         """
         Analyzes two claims and returns a human-readable report.
         """
-        features_a = await self.claim_parser.extract_features(claim_text_a)
-        features_b = await self.claim_parser.extract_features(claim_text_b)
+        features_a = await self.claim_feature_extractor.extract_features(claim_text_a)
+        features_b = await self.claim_feature_extractor.extract_features(claim_text_b)
         
         print(f"DEBUG: claim A features: {features_a}")
         print(f"DEBUG: claim B features: {features_b}")

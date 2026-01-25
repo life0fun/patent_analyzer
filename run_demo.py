@@ -1,7 +1,7 @@
-from agent import PatentAgent
+from app.subag  ents.master_agent import MasterAgent
 
 def main():
-    agent = PatentAgent()
+    agent = MasterAgent()
 
     # Claim A: A drone with specific features
     claim_a = """
