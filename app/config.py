@@ -16,6 +16,8 @@ def get_project_root() -> Path:
 
 
 PROJECT_ROOT = get_project_root()
+APP_PATH = PROJECT_ROOT / "app"
+DB_PATH = APP_PATH / "db"
 WORKSPACE_ROOT = PROJECT_ROOT / "workspace"
 
 

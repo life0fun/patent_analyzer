@@ -27,7 +27,7 @@ INSTRUCTIONS = """
     4. Do not include the preamble or the transition phrase in the list unless it contains a limitation.
 
     ### OUTPUT FORMAT
-    Provide the results in json format with each feature having five keys: "Feature Type", "Extracted Feature", "Keywords", "IPC/CPC codes", and "Claim Number".
+    Provide the results in json format with each feature having five keys: "FeatureType", "ExtractedFeature", "Keywords", "IPCCPCcodes", and "ClaimNumber".
 
     ### PATENT CLAIMS TO ANALYZE
     {claim_text}

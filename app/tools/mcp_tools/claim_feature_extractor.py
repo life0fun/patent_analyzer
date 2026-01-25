@@ -2,6 +2,7 @@ from typing import List
 import json
 import re
 from agents import Agent, Runner
+from app.db.db import init_db
 from app.prompt.claim_feature_extract import SYSTEM_PROMPT, INSTRUCTIONS
 
 class RuleBasedClaimFeatureExtractor:
@@ -71,9 +72,9 @@ class LLMClaimFeatureExtractor:
             clean_json = response_text.replace("```json", "").replace("```", "").strip()
             features = json.loads(clean_json)
             if isinstance(features, list):
-                return [str(f) for f in features]
+                return [json.dumps(f) for f in features]
             else:
-                return [str(features)]
+                return [json.dumps(features)]
         except json.JSONDecodeError:
             # Fallback if JSON parsing fails
             return [line.strip() for line in response_text.splitlines() if line.strip()]
@@ -92,10 +93,25 @@ if __name__ == "__main__":
     with open(claim_file, 'r') as f:
         claim_text = f.read()
     
-    # Parse the claim using rule-based parser
-    parser = LLMClaimFeatureExtractor()
-    features = asyncio.run(parser.extract_features(claim_text))
+    # Parse the claim using LLM extractor
+    extractor = LLMClaimFeatureExtractor()
+    features_list = asyncio.run(extractor.extract_features(claim_text))
     
     print("Extracted Features:")
-    for i, feature in enumerate(features, 1):
+    for i, feature in enumerate(features_list, 1):
         print(f"{i}. {feature}")
+    
+    # Save features to database
+    conn = init_db()
+    cursor = conn.cursor()
+    
+    for feature_json_str in features_list:
+        feature_obj = json.loads(feature_json_str)
+        feature_text = feature_obj["ExtractedFeature"]
+        cursor.execute(
+            "INSERT INTO features (feature_text) VALUES (?)",
+            (feature_text,),
+        )
+    
+    conn.commit()
+    conn.close()
