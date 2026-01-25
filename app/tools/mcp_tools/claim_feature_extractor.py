@@ -105,6 +105,11 @@ if __name__ == "__main__":
     conn = init_db()
     cursor = conn.cursor()
     
+    # clean up the tables
+    cursor.execute("DELETE FROM features")
+    cursor.execute("DELETE FROM keywords")
+    conn.commit()
+    
     for feature_json_str in features_list:
         feature_obj = json.loads(feature_json_str)
         feature_text = feature_obj["ExtractedFeature"]
@@ -112,6 +117,12 @@ if __name__ == "__main__":
             "INSERT INTO features (feature_text) VALUES (?)",
             (feature_text,),
         )
+        feature_id = cursor.lastrowid
+        for keyword in feature_obj["Keywords"]:
+            cursor.execute(
+                "INSERT INTO keywords (keyword, feature_id) VALUES (?, ?)",
+                (keyword, feature_id),
+            )
     
     conn.commit()
     conn.close()

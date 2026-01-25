@@ -21,10 +21,10 @@ INSTRUCTIONS = """
 
     ## Example:
     
-    Keyword: VTOL ducted fan; IPC/CPC: B64C 29/00; Rationale: Propellers or fans specialized for aircraft. Expanded Keywords: [Encased rotor, annular duct, blade pitch control, aerodynamic shroud.]
+    Keyword: VTOL ducted fan; IPCCPCcode: B64C 29/00; Rationale: Propellers or fans specialized for aircraft. ExpandedKeywords: [Encased rotor, annular duct, blade pitch control, aerodynamic shroud.]
     
 
-    ### Output Format: Provide the results in json format with each keyword having four keys: "Keyword", "Suggested IPC/CPC Code", "Code Definition/Rationale", "Expanded Keywords".
+    ### Output Format: Provide the results in json format with each keyword having four keys: "Keyword", "IPCCPCcode", "Rationale", "ExpandedKeywords".
 
     ### Keyword to expand:
     {keyword}

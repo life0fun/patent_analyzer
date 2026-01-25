@@ -25,7 +25,10 @@ def init_db(db_path=DB_PATH/'keywords.db'):
     CREATE TABLE IF NOT EXISTS expanded_keywords (
         id INTEGER PRIMARY KEY,
         keyword_id INTEGER NOT NULL,
+        keyword TEXT NOT NULL,
         expanded_keywords TEXT NOT NULL,
+        ipc_cpc_code TEXT NOT NULL,
+        rationale TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         UNIQUE(keyword_id),
         FOREIGN KEY (keyword_id) REFERENCES keywords(id)
