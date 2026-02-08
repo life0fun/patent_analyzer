@@ -7,26 +7,14 @@ from sklearn.preprocessing import normalize
 from typing import List, Dict
 from app.logger import logger
 
-EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2" # 384 dim
+sentence_transformer = SentenceTransformer(EMBED_MODEL)
+def embed_text(texts: List[str]):
+    vecs = sentence_transformer.encode(texts)
+    return vecs
 
 # python -m spacy download en_core_web_trf
 nlp = spacy.load("en_core_web_trf")
-sentence_transformer = SentenceTransformer(EMBED_MODEL)
-
-# ----------------------------
-# Vector Embedding using sentence-transformers
-# ----------------------------
-def embed_text(texts: List[str]):
-    vecs = sentence_transformer.encode(
-        texts,
-        convert_to_numpy=True,   # VERY IMPORTANT
-        show_progress_bar=False,
-        normalize_embeddings=False  # we normalize manually
-    )
-    vecs = normalize(vecs, axis=1)  # returns float64
-    vecs = np.ascontiguousarray(vecs.astype(np.float32))
-    return vecs
-
 def extract_features_nlp(claim: str) -> List[str]:
     """
     NLP-based claim tech feature extraction using dependency + noun phrase parsing
@@ -82,7 +70,7 @@ def predict_cpc_codes(claim: str) -> List[str]:
 
     preds = set()
     text = claim.lower()
-
+    # map claim keywords to cpc code.
     for k, v in mapping.items():
         if k in text:
             preds.add(v)
@@ -93,18 +81,16 @@ def predict_cpc_codes(claim: str) -> List[str]:
 # ----------------------------
 # CPC Expansion Graph
 # ----------------------------
-
 def build_cpc_graph():
-    G = nx.Graph()
     edges = [
         ("G06F 9/50", "G06F 9/52"),
         ("G06F 9/52", "G06F 9/54"),
         ("G06F 9/54", "G06F 9/56"),
         ("G06F 9/48", "G06F 9/50")
     ]
+    G = nx.Graph()
     G.add_edges_from(edges)
     return G
-
 
 def expand_cpc(codes: List[str], graph, hops=2) -> List[str]:
     expanded = set(codes)
@@ -121,6 +107,7 @@ class VectorIndex:
         self.index = faiss.IndexFlatIP(dim)
         self.patent_ids = []
 
+    # add n vectors at once. separately store patent_ids.
     def add(self, vectors, patent_ids):
         self.index.add(vectors)
         self.patent_ids.extend(patent_ids)
@@ -133,8 +120,8 @@ class VectorIndex:
         scores, ids = self.index.search(query_vec, k)
         results = []
         for i, idx in enumerate(ids[0]):
-            if idx != -1:
-                results.append((self.patent_ids[idx], float(scores[0][i])))
+            if idx != -1: # -1 is the default value for no match
+                results.append((self.patent_ids[idx], float(scores[0, i])))
         return results
 
 
@@ -181,7 +168,7 @@ class PatentSearchEngine:
         final = []
         for pid, base_score in scores.items():
             p = self.patent_map[pid]
-            cpc_overlap = len(set(p["cpc"]) & set(expanded_cpc))
+            cpc_overlap = len(set(p["cpc"]) & set(expanded_cpc)) # claim expanded cpc overlap with patent cpc
             total = (
                 base_score
                 + 0.15 * cpc_overlap
