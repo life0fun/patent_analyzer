@@ -17,3 +17,5 @@ faiss-cpu
 networkx
 sentence-transformers
 spacy
+anthropic
+python-dotenv

@@ -2,6 +2,7 @@ import spacy
 import numpy as np
 import faiss
 import networkx as nx
+import re
 from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import normalize
 from typing import List, Dict
@@ -29,12 +30,22 @@ def extract_noun_verb_phrase(claim: str) -> List[str]:
     """
     NLP-based claim tech feature extraction using dependency + noun phrase parsing
     """
+    claim = preprocess_claim(claim)
     doc = nlp(claim)  # full linguistic parse tree of the claim.
-    # Extract noun chunks
-    noun_chunks = [chunk.text.lower() for chunk in doc.noun_chunks]
-    # Extract verbs (lemmatized form)
-    verbs = [token.lemma_.lower() for token in doc if token.pos_ == "VERB"]
-
+    # Filter out very short noun chunks and stopwords
+    noun_chunks = [
+        chunk.text.lower().strip() 
+        for chunk in doc.noun_chunks 
+        if len(chunk.text.split()) > 1 or chunk.root.pos_ == "NOUN"
+    ]
+    
+    # Get only meaningful verbs (exclude auxiliary verbs)
+    verbs = [
+        token.lemma_.lower() 
+        for token in doc 
+        if token.pos_ == "VERB" and token.dep_ not in ["aux", "auxpass"]
+    ]
+    
     # Combine for Jaccard
     features = set(noun_chunks + verbs)
     logger.info(f"Extracted features: {features}")
