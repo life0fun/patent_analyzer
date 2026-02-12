@@ -17,7 +17,6 @@ schema = {
     {
       "claim_feature": "",
       "cpc_canonical_keywords": [],
-      "alternative_cpc_terms": [],
       "notes": ""
     }
   ],
@@ -105,7 +104,7 @@ You are an expert patent analyst with deep knowledge of patent free-to-operate (
 6. Generate Google patent queries
 
 ## TASK 1: Extract Claim Features
-Identify and extract all significant features from the claim:
+Identify top 5 critical patent claim features from each independent claim.
 
 1. **Technical Components**: Physical elements, devices, systems, materials, or apparatus
 2. **Functional Elements**: Actions, operations, processes, or behaviors (focus on verbs and their objects)
@@ -118,17 +117,15 @@ EXTRACTED FEATURES:
 - Effects/Results: [list intended outcomes]
 
 ## TASK 2: Map Features to CPC Canonical Keywords
-For each extracted feature, identify the standardized CPC terminology used in patent classification:
+For each extracted claim feature, identify top 5 standardized CPC terminology used in patent classification:
 
 - Translate informal terms to formal CPC vocabulary
-- Identify multiple canonical terms where applicable (synonyms used in CPC)
-- Include both specific and general terminology levels
+- Identify multiple canonical terms where applicable (synonyms used in CPC), be specific.
 
 Present as:
 CANONICAL MAPPING:
 - Claim Feature
 - CPC Canonical Keywords
-- Alternative CPC Terms
 - Notes
 
 ## TASK 3: Identify Primary CPC Codes
@@ -157,6 +154,7 @@ For each primary CPC code identified, systematically expand to related codes:
 2. **Sibling Groups**: Find related groups at the same hierarchical level
 3. **Child Subgroups**: Drill down to more specific subgroup classifications
 4. **Cross-References**: Include indexing codes and related subclasses referenced in CPC definitions
+5. At most 2 codes for each category.
 
 Format as:
 EXPANDED CPC CODES:
@@ -195,8 +193,7 @@ FEATURE: [Original Claim Feature]
 - Way keywords
 - Result keywords
 
-
-Provide this expansion for top 5 most important features.
+Provide this top 2 expansions for each category for top 5 most critical features.
 
 ## TASK 6: Generate Top 10 Google Patents Query Strings
 Create 10 search queries ordered from MOST STRICT to MOST RELAXED:

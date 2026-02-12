@@ -1,1152 +1,277 @@
 {
     "extracted_features": {
         "components": [
-            "boom (central elongated structural element)",
-            "propulsion assembly",
-            "plurality of rotor blades",
-            "shroud (surrounding rotor blades)",
-            "plurality of paddles",
-            "stanchion (paddle rotation axis)",
-            "first wing",
-            "second wing",
-            "third wing (optional - claim 18)",
-            "fourth wing (optional - claim 18)",
-            "first rotating joint",
-            "second rotating joint",
-            "electrical energy source",
-            "payload connector",
-            "plurality of stator vanes (optional - claim 5)",
-            "electrical connection (in payload connector)",
-            "airfoil shaped portion (payload connector rudder feature)"
+            "Boom (longitudinal structural member)",
+            "Propulsion assembly (shrouded rotor with blades)",
+            "Wings (first and second, coupled to boom ends)",
+            "Rotating joints (for propulsion transition and wing rotation)",
+            "Paddles (disposed between rotors and boom for control)"
         ],
         "functions": [
-            "couple propulsion assembly to first end of boom",
-            "surround rotor blades with shroud",
-            "dispose paddles between rotor blades and boom",
-            "rotate first wing about axis through its length via first rotating joint",
-            "rotate second wing about axis through its length via second rotating joint",
-            "accommodate rotation of propulsion assembly with respect to boom",
-            "transition aircraft from vertical flight to horizontal flight",
-            "fold wing substantially parallel with boom (first position)",
-            "unfold wing from boom (second position)",
-            "power propulsion assembly with electrical energy source",
-            "rotate paddles about stanchion",
-            "modify direction that moving air is displaced relative to boom",
-            "rotate individual paddles about axes through their lengths",
-            "spin boom about axis through length of boom in vertical flight",
-            "suspend boom substantially vertically from propulsion assembly",
-            "rotate wings together with boom in vertical flight",
-            "orient wings substantially perpendicular to boom (second position)",
-            "generate vertical thrust during vertical flight mode",
-            "generate horizontal thrust during horizontal flight mode",
-            "generate lift with wings during horizontal flight mode",
-            "unfold wings during transition from vertical to horizontal flight",
-            "orient boom substantially horizontally in horizontal flight mode",
-            "move wings independently with respect to one another",
-            "connect to payload while aircraft is in flight",
-            "transfer electrical energy between energy source and payload during flight",
-            "operate payload connector airfoil as rudder during flight"
+            "Rotate first wing about an axis through its length",
+            "Transition aircraft from vertical flight to horizontal flight via second rotating joint",
+            "Fold wings substantially parallel with the boom",
+            "Modify direction of moving air via paddles",
+            "Transfer electrical energy between source in boom and payload"
         ],
         "effects": [
-            "VTOL (vertical takeoff and landing) capability",
-            "Flight mode conversion between vertical and horizontal flight",
-            "Compact folded configuration for storage/transport",
-            "Directional control via paddle air displacement",
-            "Anti-torque control via boom spinning",
-            "Aerodynamic lift generation in horizontal flight",
-            "Electrical power delivery to payload during flight",
-            "Dual-function payload connector (attachment + rudder control)",
-            "Enhanced safety via shrouded rotor",
-            "Improved propulsion efficiency via ducted configuration",
-            "Versatile boom orientation (vertical/horizontal)",
-            "Independent wing control capability",
-            "Stabilized vertical flight via wing-boom rotation",
-            "Smooth transition between flight modes",
-            "Electric propulsion benefits (quiet, clean, efficient)",
-            "In-flight payload servicing capability"
+            "Aerodynamic transition between hover and cruise modes",
+            "Yaw/Pitch/Roll control using ducted fan flow manipulation",
+            "Compact storage via parallel wing folding",
+            "Integration of payload as an active aerodynamic surface (rudder)",
+            "Continuous power supply to payload during flight"
         ]
     },
     "canonical_mapping": [
         {
-            "claim_feature": "Boom (central structural element)",
+            "claim_feature": "Propulsion assembly with shroud",
             "cpc_canonical_keywords": [
-                "fuselage",
-                "body",
-                "structural frame",
-                "central beam",
-                "airframe"
+                "Shrouded propellers",
+                "Ducted fans",
+                "Encased rotors",
+                "Cowled fans",
+                "Fan-in-duct"
             ],
-            "alternative_cpc_terms": [
-                "main body",
-                "longitudinal member",
-                "support structure",
-                "spine",
-                "tubular structure"
-            ],
-            "notes": "In VTOL context, serves as main load-bearing structure, component housing, and can orient vertically or horizontally"
+            "notes": "Classification focuses on the enclosure of the rotating aerodynamic elements."
         },
         {
-            "claim_feature": "Propulsion assembly with shrouded rotor blades",
+            "claim_feature": "Rotating joint for transition",
             "cpc_canonical_keywords": [
-                "ducted rotor",
-                "shrouded propeller",
-                "ducted fan",
-                "annular wing rotor",
-                "enclosed rotor"
+                "Tilting rotors",
+                "Convertible aircraft",
+                "Thrust vectoring",
+                "Variable orientation propulsion",
+                "Pivoting engines"
             ],
-            "alternative_cpc_terms": [
-                "channeled propeller",
-                "ring-wing rotor",
-                "duct-augmented rotor",
-                "cowled rotor",
-                "fenestron"
-            ],
-            "notes": "Rotor blades surrounded by shroud/duct for improved efficiency, safety, and noise reduction"
+            "notes": "Essential for 'Tail-sitter' or 'Tilt-rotor' functionality in CPC B64C29."
         },
         {
-            "claim_feature": "Rotating joint for wing rotation about lengthwise axis",
+            "claim_feature": "Paddles / Stator vanes",
             "cpc_canonical_keywords": [
-                "pivoting wing",
-                "rotatable wing",
-                "wing rotation mechanism",
-                "wing pivot joint",
-                "articulated wing"
+                "Deflecting vanes",
+                "Inlet vanes",
+                "Outlet vanes",
+                "Thrust deflectors",
+                "Flow control surfaces"
             ],
-            "alternative_cpc_terms": [
-                "swiveling wing",
-                "revolving wing",
-                "wing hinge",
-                "wing roll joint",
-                "wing actuator"
-            ],
-            "notes": "Enables wing folding/unfolding by rotating about axis parallel to wing length (spanwise rotation)"
+            "notes": "These elements modify the slipstream of the shrouded rotor for steering."
         },
         {
-            "claim_feature": "Transition from vertical to horizontal flight",
+            "claim_feature": "Folding wing (parallel to boom)",
             "cpc_canonical_keywords": [
-                "convertible aircraft",
-                "tilt-rotor",
-                "VTOL transition",
-                "flight mode conversion",
-                "variable flight mode"
+                "Folding wings",
+                "Collapsing wings",
+                "Stowable aerofoils",
+                "Swing wings",
+                "Variable geometry wings"
             ],
-            "alternative_cpc_terms": [
-                "hover to forward flight transition",
-                "vertical/horizontal flight transformation",
-                "hybrid flight configuration",
-                "multi-mode aircraft"
-            ],
-            "notes": "Core defining characteristic of convertible VTOL aircraft; achieved via propulsion tilting"
+            "notes": "Maps to B64C3/56 for space-saving or configuration changes."
         },
         {
-            "claim_feature": "Second rotating joint for propulsion assembly tilt",
+            "claim_feature": "Payload connector (with electrical connection)",
             "cpc_canonical_keywords": [
-                "tilt mechanism",
-                "pivoting thrust unit",
-                "rotatable propulsion",
-                "thrust vector actuator",
-                "tilting rotor joint"
+                "Payload interfaces",
+                "Electrical couplings",
+                "Power transfer",
+                "Modular cargo",
+                "Active payloads"
             ],
-            "alternative_cpc_terms": [
-                "propulsion pivot",
-                "thrust direction control",
-                "rotor inclination mechanism",
-                "nacelle tilt",
-                "gimbal mount"
-            ],
-            "notes": "Enables transition between flight modes via thrust vectoring; rotates propulsion relative to boom"
-        },
-        {
-            "claim_feature": "Paddles for air displacement control",
-            "cpc_canonical_keywords": [
-                "vanes",
-                "deflector",
-                "control surface",
-                "air guide",
-                "flow director"
-            ],
-            "alternative_cpc_terms": [
-                "thrust vector control",
-                "deflection plate",
-                "directional vane",
-                "rudder",
-                "air rudder"
-            ],
-            "notes": "Rotate about stanchion to modify air displacement direction; provide directional control and anti-torque"
-        },
-        {
-            "claim_feature": "Electrical energy source in boom",
-            "cpc_canonical_keywords": [
-                "battery",
-                "electric power source",
-                "energy storage",
-                "electrical accumulator",
-                "power supply"
-            ],
-            "alternative_cpc_terms": [
-                "rechargeable power supply",
-                "electric propulsion power",
-                "onboard electrical energy",
-                "fuel cell",
-                "battery pack"
-            ],
-            "notes": "Powers electric propulsion system; housed within boom structure"
-        },
-        {
-            "claim_feature": "Folding wings (parallel to boom)",
-            "cpc_canonical_keywords": [
-                "foldable wing",
-                "retractable wing",
-                "collapsible wing",
-                "wing stowage",
-                "deployable wing"
-            ],
-            "alternative_cpc_terms": [
-                "articulated wing",
-                "wing folding mechanism",
-                "compact wing configuration",
-                "wing deployment system"
-            ],
-            "notes": "Wings fold to parallel position for compact storage; unfold to perpendicular for flight"
-        },
-        {
-            "claim_feature": "Stator vanes in shroud",
-            "cpc_canonical_keywords": [
-                "stator",
-                "guide vanes",
-                "fixed vanes",
-                "stationary blades",
-                "straightening vanes"
-            ],
-            "alternative_cpc_terms": [
-                "de-swirl vanes",
-                "static blading",
-                "non-rotating vanes",
-                "outlet guide vanes",
-                "stator cascade"
-            ],
-            "notes": "Fixed vanes within shroud to improve ducted rotor efficiency and reduce swirl"
-        },
-        {
-            "claim_feature": "Payload connector with electrical connection",
-            "cpc_canonical_keywords": [
-                "payload interface",
-                "cargo coupling",
-                "load attachment",
-                "electrical connector",
-                "power transfer coupling"
-            ],
-            "alternative_cpc_terms": [
-                "cargo hook",
-                "payload mounting",
-                "load interface",
-                "charging connector",
-                "external load system"
-            ],
-            "notes": "Enables in-flight payload attachment and electrical power transfer; includes dual-function airfoil rudder"
-        },
-        {
-            "claim_feature": "Boom suspended vertically from propulsion",
-            "cpc_canonical_keywords": [
-                "vertical orientation",
-                "suspended fuselage",
-                "hanging configuration",
-                "pendant arrangement",
-                "vertical attitude"
-            ],
-            "alternative_cpc_terms": [
-                "vertically-hung body",
-                "suspended structure",
-                "vertical flight configuration",
-                "hover orientation"
-            ],
-            "notes": "Boom hangs vertically during VTOL mode; transitions to horizontal for cruise flight"
-        },
-        {
-            "claim_feature": "Wings rotate with boom in vertical flight",
-            "cpc_canonical_keywords": [
-                "body rotation",
-                "fuselage spinning",
-                "anti-torque rotation",
-                "coupled rotation",
-                "synchronized rotation"
-            ],
-            "alternative_cpc_terms": [
-                "collective rotation",
-                "common axis rotation",
-                "torque compensation rotation",
-                "co-rotating assembly"
-            ],
-            "notes": "Wings and boom rotate together as unit to counter rotor torque in hover"
+            "notes": "Focus on the functional link and energy exchange during flight."
         }
     ],
     "primary_cpc_codes": [
         {
-            "code": "B64C29/00",
-            "description": "Aircraft capable of landing or taking off vertically, e.g. vertical take-off and landing [VTOL] aircraft",
-            "relevance": "This is the primary classification for the claimed invention. The aircraft explicitly describes vertical flight capability and transition to horizontal flight, which is the defining characteristic of VTOL aircraft. Claims 1, 11-16 specifically describe vertical flight mode, transition mechanisms, and horizontal flight mode.",
-            "coverage": "Covers overall aircraft concept, vertical flight capability, flight mode transition mechanism, boom vertical suspension, and convertible flight configuration",
+            "code": "B64C 29/0033",
+            "description": "Aircraft capable of landing or taking-off vertically [VTOL] having tilting propulsion units",
+            "relevance": "Directly covers the 'second rotating joint' configured to transition the aircraft via propulsion rotation.",
+            "coverage": "Claims 1, 11, 13",
             "confidence": "High",
             "rank": 1
         },
         {
-            "code": "B64C27/52",
-            "description": "Rotorcraft; Helicopters - Tilting of rotor bodily relative to fuselage",
-            "relevance": "The second rotating joint is explicitly configured to rotate the propulsion assembly with respect to the boom to transition from vertical to horizontal flight (claims 1, 13). This is precisely the tilting rotor mechanism covered by this classification.",
-            "coverage": "Covers the second rotating joint, propulsion assembly tilt mechanism, rotation of thrust unit relative to boom, and flight mode transition via rotor tilting",
+            "code": "B64U 10/20",
+            "description": "Unmanned aerial vehicles [UAV] characterized by VTOL capability",
+            "relevance": "The boom and payload configuration strongly implies a UAV/Drone architecture.",
+            "coverage": "Independent Claims 1, 11, 19",
             "confidence": "High",
             "rank": 2
         },
         {
-            "code": "B64C3/56",
-            "description": "Wings - Foldable, collapsible, or convertible",
-            "relevance": "Claims 2, 10, 12, 15, 17 describe wings that fold substantially parallel with the boom and unfold to perpendicular positions via rotating joints. This is explicitly a foldable/deployable wing mechanism, with rotation about the wing's lengthwise axis.",
-            "coverage": "Covers first and second rotating joints for wing rotation, wing folding mechanism parallel to boom, wing deployment to perpendicular position, and independent wing movement",
+            "code": "B64C 11/001",
+            "description": "Shrouded propellers; Ducted fans",
+            "relevance": "Covers the propulsion assembly comprising rotor blades surrounded by a shroud.",
+            "coverage": "Claim 1, 5",
             "confidence": "High",
             "rank": 3
         },
         {
-            "code": "B64C27/26",
-            "description": "Rotorcraft; Helicopters - Arrangements of rotors - Rotors with ring or Coanda effect",
-            "relevance": "The propulsion assembly comprises rotor blades surrounded by a shroud (claim 1), which is a ducted/shrouded rotor configuration. This classification covers rotors enclosed in a ring or duct structure, matching the claimed shroud configuration.",
-            "coverage": "Covers shrouded propulsion assembly, rotor blades within shroud, ducted fan/rotor configuration, and optional stator vanes (claim 5)",
+            "code": "B64C 3/56",
+            "description": "Folding or collapsing wings to reduce overall dimensions of aircraft",
+            "relevance": "Covers the folding mechanism where wings move parallel to the boom.",
+            "coverage": "Claims 2, 10, 12",
             "confidence": "High",
             "rank": 4
         },
         {
-            "code": "B64D27/24",
-            "description": "Arrangement or mounting of power plants in aircraft - Electric power supply",
-            "relevance": "Claim 3 explicitly includes an electrical energy source disposed in the boom that powers the propulsion assembly, and claim 19 describes the boom housing an electrical energy source. This makes it an electrically-powered aircraft requiring this classification.",
-            "coverage": "Covers electrical energy source, electric propulsion system, power storage in boom, battery/power supply arrangement, and electrical power delivery to payload (claim 19)",
-            "confidence": "High",
+            "code": "B64C 9/38",
+            "description": "Adjustable control surfaces influencing jets; Jet-flaps",
+            "relevance": "Relates to the paddles and stator vanes modifying air displacement relative to the boom.",
+            "coverage": "Claims 1, 6, 7, 8",
+            "confidence": "Medium",
             "rank": 5
         }
     ],
     "expanded_cpc_codes": [
         {
-            "primary_code": "B64C29/00",
+            "primary_code": "B64C 29/0033",
             "parent_subclass": {
                 "code": "B64C",
                 "description": "Aeroplanes; Helicopters",
                 "related_main_groups": [
                     {
-                        "code": "B64C27/00",
-                        "description": "Rotorcraft; Helicopters"
+                        "code": "B64C 27/00",
+                        "description": "Rotorcraft"
                     },
                     {
-                        "code": "B64C39/00",
-                        "description": "Aircraft not otherwise provided for"
-                    },
-                    {
-                        "code": "B64C1/00",
-                        "description": "Fuselages; Constructional features common to fuselages, wings, stabilising surfaces or the like"
-                    },
-                    {
-                        "code": "B64C3/00",
-                        "description": "Wings"
-                    },
-                    {
-                        "code": "B64C11/00",
-                        "description": "Propellers, i.e. airscrews"
+                        "code": "B64C 39/00",
+                        "description": "Other aircraft"
                     }
                 ]
             },
             "sibling_subgroups": [
                 {
-                    "code": "B64C29/02",
-                    "description": "Tilt-wing aircraft",
-                    "relationship": "Alternative VTOL configuration using wing tilting instead of rotor tilting"
-                },
-                {
-                    "code": "B64C29/04",
-                    "description": "Tilt-rotor aircraft",
-                    "relationship": "Directly related - describes aircraft using rotor tilting for flight mode transition (matches claim functionality)"
+                    "code": "B64C 29/02",
+                    "description": "Tail-sitters",
+                    "relationship": "Similar configuration where boom orientation changes relative to gravity."
                 }
             ],
             "child_subgroups": [
                 {
-                    "code": "B64C2029/0037",
-                    "description": "Arrangements of lift-generating rotors - Details of rotor arrangements",
-                    "relevance": "Relevant to propulsion assembly positioning at boom end"
-                },
-                {
-                    "code": "B64C2029/0042",
-                    "description": "VTOL aircraft; Tiltrotor aircraft - Arrangements for tilting the rotor",
-                    "relevance": "Directly covers the second rotating joint tilt mechanism design"
-                },
-                {
-                    "code": "B64C2029/0044",
-                    "description": "VTOL aircraft - Electric drive for the rotor",
-                    "relevance": "Covers electric propulsion system for VTOL rotor"
-                },
-                {
-                    "code": "B64C2029/0051",
-                    "description": "VTOL aircraft - Transition between flight modes - Control during transition",
-                    "relevance": "Relevant to wing deployment and control during flight mode transition"
+                    "code": "B64C 29/0025",
+                    "description": "Vertical take-off and landing using ducted fans",
+                    "relevance": "Narrower focus on the shrouded propulsion element."
                 }
             ],
             "cross_referenced_codes": [
                 {
-                    "code": "B64C27/52",
-                    "description": "Tilting of rotor bodily relative to fuselage",
-                    "relationship": "Direct implementation reference for tilt-rotor mechanism"
+                    "code": "B64D 27/24",
+                    "description": "Aircraft powered by electricity",
+                    "relationship": "Covers electrical energy source in the boom."
                 },
                 {
-                    "code": "B64C39/02",
-                    "description": "Aircraft not otherwise provided for - having lift-generating rotors on tips of rotating bodies",
-                    "relationship": "Related to boom-mounted tip propulsion configuration"
-                },
-                {
-                    "code": "B64U10/13",
-                    "description": "Unmanned aerial vehicles [UAV] - Being hybrid VTOL aircraft",
-                    "relationship": "May apply if aircraft is unmanned UAV"
-                }
-            ]
-        },
-        {
-            "primary_code": "B64C27/52",
-            "parent_subclass": {
-                "code": "B64C27/00",
-                "description": "Rotorcraft; Helicopters",
-                "related_main_groups": [
-                    {
-                        "code": "B64C27/04",
-                        "description": "Constructional features of blades or rotors, e.g. shape"
-                    },
-                    {
-                        "code": "B64C27/08",
-                        "description": "Control of attitude, i.e. control of roll, pitch or yaw"
-                    },
-                    {
-                        "code": "B64C27/20",
-                        "description": "Constructional features - Fuselages; Nacelles"
-                    },
-                    {
-                        "code": "B64C27/54",
-                        "description": "Mechanisms for tilting rotors"
-                    }
-                ]
-            },
-            "sibling_subgroups": [
-                {
-                    "code": "B64C27/54",
-                    "description": "Mechanisms for tilting rotors",
-                    "relationship": "Detailed implementation of tilt mechanism for the second rotating joint"
-                },
-                {
-                    "code": "B64C27/57",
-                    "description": "Helicopters having multiple rotors",
-                    "relationship": "Alternative rotor configuration (multiple vs. single tilting)"
-                }
-            ],
-            "child_subgroups": [
-                {
-                    "code": "B64C2027/522",
-                    "description": "Tilting rotors - Forward/backward tilting of the rotor",
-                    "relevance": "Propulsion tilts from vertical to horizontal orientation (90-degree tilt)"
-                },
-                {
-                    "code": "B64C2027/525",
-                    "description": "Tilting rotors - Tilt actuators or mechanisms",
-                    "relevance": "Second rotating joint provides tilt actuation mechanism"
-                },
-                {
-                    "code": "B64C2027/528",
-                    "description": "Tilting rotors - Control of tilting movement",
-                    "relevance": "Control system for managing transition via tilt"
-                }
-            ],
-            "cross_referenced_codes": [
-                {
-                    "code": "B64C29/04",
-                    "description": "VTOL - Tilt-rotor aircraft",
-                    "relationship": "Aircraft category that utilizes tilting rotor mechanism"
-                },
-                {
-                    "code": "B64C27/12",
-                    "description": "Rotor drives",
-                    "relationship": "Power transmission to tilting rotor"
-                },
-                {
-                    "code": "F16H1/00",
-                    "description": "Toothed gearings for transmitting rotary motion",
-                    "relationship": "Potential gearing mechanisms in tilt actuator"
-                }
-            ]
-        },
-        {
-            "primary_code": "B64C3/56",
-            "parent_subclass": {
-                "code": "B64C3/00",
-                "description": "Wings",
-                "related_main_groups": [
-                    {
-                        "code": "B64C3/10",
-                        "description": "Shape of wings in plan view"
-                    },
-                    {
-                        "code": "B64C3/14",
-                        "description": "Aerofoil profile"
-                    },
-                    {
-                        "code": "B64C3/38",
-                        "description": "Adjustment of wings"
-                    },
-                    {
-                        "code": "B64C3/52",
-                        "description": "Movable wings - Tiltable wings"
-                    },
-                    {
-                        "code": "B64C9/00",
-                        "description": "Adjustable control surfaces or members"
-                    }
-                ]
-            },
-            "sibling_subgroups": [
-                {
-                    "code": "B64C3/52",
-                    "description": "Movable wings - Tiltable wings",
-                    "relationship": "Related wing movement mechanism (tilting vs. folding)"
-                },
-                {
-                    "code": "B64C3/54",
-                    "description": "Movable wings - Variable sweep wings",
-                    "relationship": "Alternative wing adjustment mechanism"
-                }
-            ],
-            "child_subgroups": [
-                {
-                    "code": "B64C2003/562",
-                    "description": "Foldable wings - Folding spanwise",
-                    "relevance": "Wings fold/rotate along spanwise axis (lengthwise rotation)"
-                },
-                {
-                    "code": "B64C2003/564",
-                    "description": "Foldable wings - Folding chordwise",
-                    "relevance": "Alternative folding direction (for comparison)"
-                },
-                {
-                    "code": "B64C2003/566",
-                    "description": "Foldable wings - Folding actuators",
-                    "relevance": "Rotating joint mechanism for wing folding/deployment"
-                }
-            ],
-            "cross_referenced_codes": [
-                {
-                    "code": "B64C9/02",
-                    "description": "Adjustable stabilising surfaces or members",
-                    "relationship": "Wings may serve stabilizing function in various positions"
-                },
-                {
-                    "code": "B64F5/00",
-                    "description": "Designing, manufacturing, assembling, cleaning, maintaining or repairing aircraft",
-                    "relationship": "Folding wings facilitate transport, storage, and maintenance"
-                }
-            ]
-        },
-        {
-            "primary_code": "B64C27/26",
-            "parent_subclass": {
-                "code": "B64C27/00",
-                "description": "Rotorcraft; Helicopters",
-                "related_main_groups": [
-                    {
-                        "code": "B64C27/04",
-                        "description": "Constructional features of blades or rotors"
-                    },
-                    {
-                        "code": "B64C27/28",
-                        "description": "Combinations of rotors"
-                    },
-                    {
-                        "code": "B64C27/32",
-                        "description": "Arrangement of power plants"
-                    }
-                ]
-            },
-            "sibling_subgroups": [
-                {
-                    "code": "B64C27/22",
-                    "description": "Compound helicopters, i.e. having additional means for lift or propulsion",
-                    "relationship": "Related hybrid configuration with multiple lift/propulsion elements"
-                },
-                {
-                    "code": "B64C27/28",
-                    "description": "Combinations of rotors",
-                    "relationship": "Could apply if multiple ducted rotors used"
-                }
-            ],
-            "child_subgroups": [
-                {
-                    "code": "B64C2027/265",
-                    "description": "Ducted rotors - Details of the shroud or duct",
-                    "relevance": "Covers shroud construction and integration with rotor blades"
-                },
-                {
-                    "code": "B64C2027/266",
-                    "description": "Ducted rotors - Having stators or stationary vanes",
-                    "relevance": "Directly covers optional stator vanes within shroud (claim 5)"
-                }
-            ],
-            "cross_referenced_codes": [
-                {
-                    "code": "B64C11/30",
-                    "description": "Propellers - Shrouded propellers",
-                    "relationship": "General classification for shrouded propellers"
-                },
-                {
-                    "code": "F04D29/28",
-                    "description": "Fans - Component parts, details or accessories - Casings; Connexions",
-                    "relationship": "Shroud/casing design principles for ducted fans"
-                },
-                {
-                    "code": "B64C23/06",
-                    "description": "Influencing airflow over aircraft surfaces - Boundary layer control",
-                    "relationship": "Shroud provides boundary layer control benefits"
-                }
-            ]
-        },
-        {
-            "primary_code": "B64D27/24",
-            "parent_subclass": {
-                "code": "B64D27/00",
-                "description": "Arrangement or mounting of power plants in aircraft",
-                "related_main_groups": [
-                    {
-                        "code": "B64D27/02",
-                        "description": "Power plants in fuselage"
-                    },
-                    {
-                        "code": "B64D27/10",
-                        "description": "Position of power plants relative to rotor"
-                    },
-                    {
-                        "code": "B64D41/00",
-                        "description": "Power supply arrangements for auxiliary purposes"
-                    }
-                ]
-            },
-            "sibling_subgroups": [
-                {
-                    "code": "B64D27/26",
-                    "description": "Arrangements for fuel supply",
-                    "relationship": "Alternative to electrical energy (fuel-based systems)"
-                },
-                {
-                    "code": "B64D31/00",
-                    "description": "Power plant control or monitoring",
-                    "relationship": "Control of electric propulsion system"
-                }
-            ],
-            "child_subgroups": [
-                {
-                    "code": "B64D2027/242",
-                    "description": "Electric power supply - Batteries",
-                    "relevance": "Electrical energy source is likely battery-based"
-                },
-                {
-                    "code": "B64D2027/244",
-                    "description": "Electric power supply - Fuel cells",
-                    "relevance": "Alternative electrical energy source option"
-                }
-            ],
-            "cross_referenced_codes": [
-                {
-                    "code": "H01M50/20",
-                    "description": "Constructional details of battery containers - Casings; Compartments; Housings",
-                    "relationship": "Battery housing within boom structure"
-                },
-                {
-                    "code": "B60L50/60",
-                    "description": "Electric propulsion with power supplied within the vehicle - using propulsion power supplied by batteries or fuel cells",
-                    "relationship": "General electric propulsion principles"
-                },
-                {
-                    "code": "H02J7/00",
-                    "description": "Circuit arrangements for charging or depolarising batteries or for supplying loads from batteries",
-                    "relationship": "Battery charging and power management systems"
+                    "code": "B64U 30/297",
+                    "description": "Tilting rotors for UAVs",
+                    "relationship": "Specific UAV indexing code for tilting propulsion."
                 }
             ]
         }
     ],
     "keyword_expansion": [
         {
-            "feature": "Propulsion assembly with shrouded rotor blades",
+            "feature": "Second rotating joint (Propulsion Transition)",
             "function_keywords": {
                 "exact": [
-                    "generate thrust",
-                    "produce lift",
-                    "provide propulsion",
-                    "create airflow"
+                    "transition aircraft",
+                    "rotate propulsion"
                 ],
                 "synonyms": [
-                    "develop thrust force",
-                    "generate vertical lift",
-                    "supply motive power",
-                    "induce air movement",
-                    "deliver propulsive force"
+                    "pivot assembly",
+                    "articulate thrust"
                 ],
                 "broader": [
-                    "propel aircraft",
-                    "enable flight",
-                    "provide flight power",
-                    "create aerodynamic force"
+                    "change flight mode",
+                    "reorient motor"
                 ],
                 "narrower": [
-                    "generate hover thrust",
-                    "produce VTOL lift",
-                    "create ducted fan thrust",
-                    "develop shrouded rotor lift"
+                    "tilting for cruise",
+                    "vectoring for hover"
                 ]
             },
             "way_keywords": {
                 "exact": [
-                    "ducted rotor",
-                    "shrouded propeller",
-                    "enclosed fan",
-                    "rotor within shroud",
-                    "duct-surrounded blades"
+                    "rotating joint"
                 ],
                 "alternatives": [
-                    "ducted fan",
-                    "channeled rotor",
-                    "ring-wing rotor",
-                    "annular propeller",
-                    "fenestron",
-                    "fantail rotor",
-                    "cowled rotor",
-                    "ducted thrust unit"
+                    "swivel mount",
+                    "pivoting nacelle"
                 ],
                 "variants": [
-                    "duct-augmented rotor",
-                    "faired propeller",
-                    "shroud-enclosed blades",
-                    "tunnel rotor",
-                    "ring shroud rotor",
-                    "toroidal duct propeller"
+                    "hinged boom attachment",
+                    "servo-controlled axis"
                 ],
                 "related": [
-                    "coanda effect rotor",
-                    "boundary layer control",
-                    "augmented thrust",
-                    "lip diffuser",
-                    "inlet guide vanes",
-                    "outlet stator vanes"
+                    "actuator",
+                    "tilt-mechanism"
                 ]
             },
             "result_keywords": {
                 "exact": [
-                    "vertical thrust",
-                    "hover capability",
-                    "VTOL performance",
-                    "lifting force"
+                    "transition to horizontal flight"
                 ],
                 "equivalents": [
-                    "vertical force generation",
-                    "hovering thrust",
-                    "static thrust",
-                    "lift production",
-                    "upward force"
+                    "fixed-wing flight conversion"
                 ],
                 "benefits": [
-                    "increased efficiency",
-                    "improved safety",
-                    "reduced noise",
-                    "enhanced thrust",
-                    "better control",
-                    "protected blades",
-                    "lower acoustic signature"
+                    "increased range",
+                    "high speed cruise"
                 ],
                 "performance": [
-                    "thrust augmentation",
-                    "noise reduction",
-                    "efficiency improvement",
-                    "safety enhancement",
-                    "compact design"
+                    "aerodynamic efficiency",
+                    "thrust redirection"
                 ]
             }
         },
         {
-            "feature": "Transition from vertical to horizontal flight via tilting rotor",
+            "feature": "Paddles (Flow Control)",
             "function_keywords": {
                 "exact": [
-                    "transition flight mode",
-                    "convert from vertical to horizontal",
-                    "change flight configuration",
-                    "transform aircraft orientation",
-                    "shift between hover and cruise"
+                    "modify direction",
+                    "displace air"
                 ],
                 "synonyms": [
-                    "shift flight regime",
-                    "alter flight mode",
-                    "modify flight attitude",
-                    "reconfigure flight state",
-                    "adapt flight orientation"
+                    "deflect slipstream",
+                    "steer exhaust"
                 ],
                 "broader": [
-                    "enable multi-mode flight",
-                    "provide convertible flight",
-                    "allow variable flight",
-                    "achieve hybrid operation"
+                    "control attitude",
+                    "manage airflow"
                 ],
                 "narrower": [
-                    "tilt from hover to cruise",
-                    "pivot from VTOL to forward flight",
-                    "rotate from vertical to horizontal thrust",
-                    "transition propulsion angle"
-                ]
-            },
-            "way_keywords": {
-                "exact": [
-                    "tilting rotor",
-                    "pivoting propulsion",
-                    "rotating thrust unit",
-                    "tilt mechanism",
-                    "second rotating joint"
-                ],
-                "alternatives": [
-                    "swiveling rotor",
-                    "articulated propulsion",
-                    "pivoting thruster",
-                    "inclinable rotor",
-                    "rotatable power unit",
-                    "gimbal-mounted rotor",
-                    "tilting nacelle"
-                ],
-                "variants": [
-                    "tilt-rotor joint",
-                    "thrust vector actuator",
-                    "rotor pivot assembly",
-                    "propulsion gimbal",
-                    "tilt actuator mechanism",
-                    "variable angle rotor"
-                ],
-                "related": [
-                    "thrust vectoring",
-                    "rotor inclination",
-                    "nacelle tilting",
-                    "power unit rotation",
-                    "directional thrust control",
-                    "variable thrust angle"
-                ]
-            },
-            "result_keywords": {
-                "exact": [
-                    "flight mode conversion",
-                    "VTOL transition",
-                    "hover-to-cruise capability",
-                    "dual-mode operation"
-                ],
-                "equivalents": [
-                    "convertible flight performance",
-                    "multi-regime operation",
-                    "hybrid flight mode",
-                    "dual-mode capability",
-                    "variable flight configuration"
-                ],
-                "benefits": [
-                    "vertical takeoff capability",
-                    "efficient cruise flight",
-                    "operational flexibility",
-                    "no runway requirement",
-                    "enhanced versatility",
-                    "expanded mission envelope"
-                ],
-                "performance": [
-                    "seamless transition",
-                    "smooth mode change",
-                    "efficient conversion",
-                    "stable transformation",
-                    "controllable transition"
-                ]
-            }
-        },
-        {
-            "feature": "Foldable wings rotating about lengthwise axis",
-            "function_keywords": {
-                "exact": [
-                    "fold wing parallel to boom",
-                    "unfold wing perpendicular to boom",
-                    "deploy wing for flight",
-                    "retract wing for storage",
-                    "rotate wing about lengthwise axis"
-                ],
-                "synonyms": [
-                    "collapse wing alongside fuselage",
-                    "extend wing outward",
-                    "stow wing against body",
-                    "expand wing for lift",
-                    "articulate wing position"
-                ],
-                "broader": [
-                    "adjust wing configuration",
-                    "modify wing position",
-                    "change wing geometry",
-                    "reconfigure wing orientation"
-                ],
-                "narrower": [
-                    "rotate wing 90 degrees",
-                    "pivot wing about longitudinal axis",
-                    "spin wing on lengthwise bearing",
-                    "roll wing about span axis"
-                ]
-            },
-            "way_keywords": {
-                "exact": [
-                    "rotating joint",
-                    "pivot mechanism",
-                    "lengthwise rotation",
-                    "axial rotation",
-                    "spanwise hinge"
-                ],
-                "alternatives": [
-                    "hinge joint",
-                    "swivel connection",
-                    "rotatable coupling",
-                    "articulated mount",
-                    "revolving attachment",
-                    "pivoting interface",
-                    "roll bearing"
-                ],
-                "variants": [
-                    "wing fold mechanism",
-                    "deployment actuator",
-                    "roll joint",
-                    "longitudinal pivot",
-                    "wing rotation bearing",
-                    "spanwise articulation"
-                ],
-                "related": [
-                    "wing articulation",
-                    "folding linkage",
-                    "deployment system",
-                    "stowage mechanism",
-                    "retraction device",
-                    "wing actuator"
-                ]
-            },
-            "result_keywords": {
-                "exact": [
-                    "compact storage",
-                    "reduced footprint",
-                    "deployable lift surface",
-                    "stowed configuration"
-                ],
-                "equivalents": [
-                    "folded configuration",
-                    "stowed position",
-                    "collapsed state",
-                    "extended flight mode",
-                    "compact transport mode"
-                ],
-                "benefits": [
-                    "space savings",
-                    "transport efficiency",
-                    "storage compactness",
-                    "rapid deployment",
-                    "variable lift area",
-                    "reduced storage volume"
-                ],
-                "performance": [
-                    "quick deployment",
-                    "secure stowage",
-                    "reliable extension",
-                    "repeatable folding",
-                    "smooth articulation"
-                ]
-            }
-        },
-        {
-            "feature": "Paddles for directional air displacement control",
-            "function_keywords": {
-                "exact": [
-                    "modify air displacement direction",
-                    "control airflow direction",
-                    "deflect moving air",
-                    "redirect thrust vector",
-                    "spin boom for anti-torque"
-                ],
-                "synonyms": [
-                    "alter flow direction",
-                    "adjust air stream orientation",
-                    "guide exhaust flow",
-                    "vector air movement",
-                    "steer airflow"
-                ],
-                "broader": [
-                    "provide directional control",
-                    "enable attitude control",
-                    "manage aircraft orientation",
-                    "control yaw motion"
-                ],
-                "narrower": [
-                    "counter rotor torque",
-                    "spin boom for stability",
-                    "deflect rotor downwash",
-                    "rotate about stanchion",
-                    "adjust individual paddle angles"
-                ]
-            },
-            "way_keywords": {
-                "exact": [
-                    "paddles",
-                    "rotating vanes",
-                    "deflectors",
-                    "air guides",
-                    "stanchion-mounted surfaces"
-                ],
-                "alternatives": [
-                    "control surfaces",
-                    "flow directors",
-                    "deflection plates",
-                    "guide vanes",
-                    "thrust vectoring surfaces",
-                    "directional vanes",
-                    "rudders",
-                    "air rudders"
-                ],
-                "variants": [
-                    "articulated paddles",
-                    "pivoting deflectors",
-                    "rotatable vanes",
-                    "adjustable surfaces",
-                    "swiveling guides",
-                    "collective pitch paddles"
-                ],
-                "related": [
-                    "stanchion-mounted",
-                    "collective rotation",
-                    "variable pitch",
-                    "flow control elements",
-                    "anti-torque device",
-                    "yaw control mechanism"
-                ]
-            },
-            "result_keywords": {
-                "exact": [
-                    "directional control",
-                    "torque compensation",
-                    "boom spinning",
-                    "yaw authority"
-                ],
-                "equivalents": [
-                    "attitude authority",
                     "yaw control",
-                    "anti-torque effect",
-                    "rotational stability",
-                    "directional stability"
-                ],
-                "benefits": [
-                    "enhanced maneuverability",
-                    "improved stability",
-                    "torque cancellation",
-                    "precise control",
-                    "efficient directional authority",
-                    "stable hover"
-                ],
-                "performance": [
-                    "effective control",
-                    "stable hover",
-                    "responsive handling",
-                    "balanced flight",
-                    "controlled orientation"
-                ]
-            }
-        },
-        {
-            "feature": "Electrical energy source powering propulsion and payload",
-            "function_keywords": {
-                "exact": [
-                    "power propulsion assembly",
-                    "supply electrical energy",
-                    "energize rotor drive",
-                    "provide electric power",
-                    "transfer energy to payload"
-                ],
-                "synonyms": [
-                    "deliver electrical current",
-                    "furnish electric energy",
-                    "supply power to motors",
-                    "energize propulsion system",
-                    "charge payload"
-                ],
-                "broader": [
-                    "enable electric propulsion",
-                    "provide aircraft power",
-                    "support electric flight",
-                    "deliver onboard energy"
-                ],
-                "narrower": [
-                    "drive electric motor",
-                    "power rotor actuator",
-                    "energize ducted fan motor",
-                    "supply in-flight payload power"
+                    "pitch modulation"
                 ]
             },
             "way_keywords": {
                 "exact": [
-                    "electrical energy source",
-                    "battery",
-                    "power storage",
-                    "energy accumulator",
-                    "boom-housed battery"
+                    "paddles"
                 ],
                 "alternatives": [
-                    "rechargeable battery",
-                    "fuel cell",
-                    "electric accumulator",
-                    "power pack",
-                    "energy storage system",
-                    "battery pack",
-                    "supercapacitor"
+                    "control vanes",
+                    "deflector flaps"
                 ],
                 "variants": [
-                    "lithium battery",
-                    "solid-state battery",
-                    "hydrogen fuel cell",
-                    "hybrid power system",
-                    "battery module",
-                    "electrochemical cell"
+                    "stator mounted paddles",
+                    "tilting vanes"
                 ],
                 "related": [
-                    "electric motor",
-                    "power distribution",
-                    "energy management",
-                    "charging system",
-                    "power electronics",
-                    "electrical connector",
-                    "payload power interface"
+                    "stanchion",
+                    "stators"
                 ]
             },
             "result_keywords": {
                 "exact": [
-                    "electric propulsion",
-                    "zero emissions",
-                    "electric flight",
-                    "payload power delivery"
+                    "spin the boom"
                 ],
                 "equivalents": [
-                    "battery-powered",
-                    "electrically driven",
-                    "emission-free operation",
-                    "clean propulsion",
-                    "in-flight charging"
+                    "rotational torque",
+                    "angular momentum"
                 ],
                 "benefits": [
-                    "reduced noise",
-                    "zero direct emissions",
-                    "simplified mechanics",
-                    "lower maintenance",
-                    "instant torque",
-                    "quiet operation",
-                    "active payload support"
+                    "precise hover control",
+                    "active stabilization"
                 ],
                 "performance": [
-                    "quiet operation",
-                    "clean flight",
-                    "efficient power delivery",
-                    "responsive thrust",
-                    "continuous payload power"
+                    "thrust vectoring efficiency"
                 ]
             }
         }
@@ -1155,118 +280,54 @@
         {
             "query_number": 1,
             "strictness": "MOST STRICT",
-            "search_string": "(CPC=B64C29/00 OR CPC=B64C29/04) AND CPC=B64C27/52 AND CPC=B64C27/26 AND CPC=B64C3/56 AND \"tilting rotor\" AND \"shrouded\" AND \"foldable wing\" AND \"boom\" AND \"vertical flight\" AND \"horizontal flight\"",
-            "strategy": "Requires all four primary CPC codes plus exact terminology for tilt-rotor, shrouded propulsion, foldable wings, boom structure, and both flight modes. Targets patents with all core claimed features.",
-            "target": "Patents that are virtually identical to this specific VTOL tilt-rotor design with ducted fan and foldable wings rotating about lengthwise axis",
-            "estimated_recall": "Low",
-            "estimated_precision": "High"
-        },
-        {
-            "query_number": 2,
-            "strictness": "MOST STRICT",
-            "search_string": "CPC=B64C29/04 AND CPC=B64C27/26 AND CPC=B64D27/24 AND (\"ducted rotor\" OR \"shrouded rotor\" OR \"ducted fan\") AND (\"folding wing\" OR \"rotating wing\") AND \"electric*\" AND \"transition\"",
-            "strategy": "Combines tilt-rotor, ducted rotor, and electric propulsion CPCs with key terminology variations for shrouded propulsion, wing folding, and flight mode transition. Includes electric propulsion requirement.",
-            "target": "Electric VTOL tilt-rotor aircraft with ducted fans and articulating wing mechanisms for compact storage",
+            "search_string": "CPC=B64C29/0033 (CPC=B64C11/001 OR \"shrouded rotor\") \"boom\" \"paddles\" \"rotating joint\" \"folding wing\"",
+            "strategy": "Requires all primary structural elements and the most relevant CPC code.",
+            "target": "Identical aircraft architectures.",
             "estimated_recall": "Low",
             "estimated_precision": "High"
         },
         {
             "query_number": 3,
-            "strictness": "HIGH",
-            "search_string": "(CPC=B64C29/00 OR CPC=B64C27/52) AND (CPC=B64C27/26 OR CPC=B64C11/30) AND (\"tilt* rotor\" OR \"pivot* propulsion\" OR \"rotat* thrust\") AND (\"shroud*\" OR \"duct*\") AND (\"wing\" AND (\"fold*\" OR \"deploy*\" OR \"retract*\"))",
-            "strategy": "Expands to include general shrouded propeller codes, uses wildcards for tilting variations, and broadens wing articulation terminology. Captures similar mechanisms with different naming conventions.",
-            "target": "VTOL aircraft with tilting shrouded propulsion systems and any form of retractable or deployable wing configuration",
+            "strictness": "HIGH STRICT",
+            "search_string": "CPC=B64C29/0033 AND \"boom\" AND (pivot* OR rotat* OR tilt*) AND \"shroud*\" AND \"wing*\"",
+            "strategy": "Focuses on the core mechanical transition mechanism using wildcards and primary CPC.",
+            "target": "Convertible boom-type aircraft with shrouded rotors.",
             "estimated_recall": "Medium",
             "estimated_precision": "High"
         },
         {
-            "query_number": 4,
-            "strictness": "HIGH",
-            "search_string": "CPC=B64C29/00 AND CPC=B64D27/24 AND (\"transition\" OR \"convert*\") AND (\"vertical\" AND \"horizontal\") AND \"flight mode\" AND (\"wing\" AND (\"articul*\" OR \"pivot*\" OR \"rotate*\"))",
-            "strategy": "Focuses on VTOL with electric power and flight mode transition capability, with emphasis on articulating wings. Doesn't require specific propulsion shrouding or tilting mechanism.",
-            "target": "Electric VTOL aircraft capable of transitioning between flight modes with adjustable wing systems, regardless of specific propulsion type",
-            "estimated_recall": "Medium",
-            "estimated_precision": "Medium-High"
-        },
-        {
             "query_number": 5,
-            "strictness": "MEDIUM",
-            "search_string": "(CPC=B64C29/00 OR CPC=B64C39/02) AND (\"shroud*\" OR \"duct*\" OR \"enclosed\" OR \"cowl*\") AND (\"rotor\" OR \"propeller\" OR \"fan\") AND (\"wing\" AND \"boom\") AND (\"vertical\" OR \"hover\")",
-            "strategy": "Broadens to include unconventional aircraft classification, any enclosed rotating propulsion, and basic boom-wing architecture. Captures non-traditional VTOL designs.",
-            "target": "VTOL or unconventional aircraft with enclosed rotors/fans, boom structure, and wings for hover/vertical flight capability",
-            "estimated_recall": "Medium-High",
+            "strictness": "MEDIUM STRICT",
+            "search_string": "(CPC=B64U10/20 OR CPC=B64C29/00) AND \"boom\" AND (\"paddles\" OR \"vanes\") AND \"transition\"",
+            "strategy": "Broadens codes to include general UAV VTOL and looks for the flow control elements.",
+            "target": "VTOL drones using boom configurations and vanes for control.",
+            "estimated_recall": "Medium",
             "estimated_precision": "Medium"
-        },
-        {
-            "query_number": 6,
-            "strictness": "MEDIUM",
-            "search_string": "CPC=B64C AND (\"tilt*\" OR \"pivot*\" OR \"rotat*\" OR \"swivel*\") AND (\"propulsion\" OR \"rotor\" OR \"thruster\" OR \"motor\") AND (\"boom\" OR \"fuselage\" OR \"body\") AND (\"VTOL\" OR \"vertical takeoff\" OR \"convertible\")",
-            "strategy": "Uses broad aircraft subclass with functional equivalents for adjustable propulsion orientation and alternative structural terms. Captures diverse tilting propulsion implementations.",
-            "target": "Any VTOL or convertible aircraft with adjustable propulsion orientation and boom/fuselage structure for mode transitions",
-            "estimated_recall": "High",
-            "estimated_precision": "Medium"
-        },
-        {
-            "query_number": 7,
-            "strictness": "LOW",
-            "search_string": "(CPC=B64C29/00 OR CPC=B64C27/00 OR CPC=B64C39/00) AND (\"control surface\" OR \"vane\" OR \"deflector\" OR \"paddle\" OR \"rudder\") AND (\"vertical flight\" OR \"hover\") AND (\"wing\" OR \"airfoil\" OR \"lift surface\")",
-            "strategy": "Expands to general VTOL and rotorcraft classes, includes various control surface terminology (paddles/vanes), and broadens wing terminology. Explores control mechanism approaches.",
-            "target": "VTOL and rotorcraft with directional control surfaces, vanes, or deflectors and wing or lift-generating surfaces",
-            "estimated_recall": "High",
-            "estimated_precision": "Low-Medium"
         },
         {
             "query_number": 8,
-            "strictness": "LOW",
-            "search_string": "CPC=B64C AND (\"electric* motor\" OR \"battery\" OR \"fuel cell\" OR \"electric* energy\") AND (\"vertical\" OR \"hover\" OR \"VTOL\") AND (\"propulsion\" OR \"thrust\" OR \"lift\") AND \"wing\"",
-            "strategy": "Very broad aircraft class with electric propulsion, vertical flight capability, and wing presence. Surveys entire electric VTOL landscape.",
-            "target": "Electric-powered aircraft capable of vertical flight or hovering with wings, regardless of specific configuration or transition mechanism",
-            "estimated_recall": "Very High",
-            "estimated_precision": "Low"
-        },
-        {
-            "query_number": 9,
-            "strictness": "MOST RELAXED",
-            "search_string": "(CPC=B64C OR CPC=B64D) AND (\"payload\" OR \"cargo\" OR \"load\") AND ((\"connector\" OR \"coupling\" OR \"interface\" OR \"hook\") AND (\"electric*\" OR \"power\" OR \"energy\")) AND \"flight\"",
-            "strategy": "Searches across aircraft and equipment subclasses for any aerial payload systems with electrical interfaces or power transfer capabilities.",
-            "target": "Aircraft or aerial vehicle equipment with electrical payload interfaces, power transfer to cargo, or payload connectors with electrical connections",
-            "estimated_recall": "Very High",
+            "strictness": "LOW STRICT",
+            "search_string": "CPC=B64C AND \"boom\" AND \"transition\" AND (\"vertical\" NEAR5 \"horizontal\")",
+            "strategy": "Uses the broad subclass and proximity operators for flight mode transition.",
+            "target": "General transition-capable aircraft with boom features.",
+            "estimated_recall": "High",
             "estimated_precision": "Low"
         },
         {
             "query_number": 10,
             "strictness": "MOST RELAXED",
-            "search_string": "CPC=B64 AND (\"convertible\" OR \"transform*\" OR \"reconfigur*\" OR \"morphing\" OR \"variable configuration\") AND (\"aircraft\" OR \"aerial vehicle\" OR \"UAV\" OR \"drone\") AND (\"flight mode\" OR \"orientation\" OR \"attitude\")",
-            "strategy": "Broadest search across all aircraft technologies for any convertible, reconfigurable, or morphing aircraft concepts with changing configurations or orientations.",
-            "target": "Any aircraft or aerial vehicle with reconfigurable, transforming, or morphing capabilities for different flight modes, configurations, or operational states",
-            "estimated_recall": "Very High",
-            "estimated_precision": "Very Low"
+            "search_string": "(VTOL OR \"vertical takeoff\") AND \"boom\" AND \"shroud*\" AND \"fold* wing\"",
+            "strategy": "Conceptual search omitting CPC codes to catch missing classifications.",
+            "target": "Broad prior art on shrouded VTOL aircraft with folding wings.",
+            "estimated_recall": "High",
+            "estimated_precision": "Most Relaxed"
         }
     ],
     "analysis_metadata": {
-        "total_features_extracted": 17,
+        "total_features_extracted": 15,
         "primary_cpc_count": 5,
-        "expanded_cpc_count": 5,
-        "total_keywords_generated": 185,
-        "query_count": 10,
-        "analysis_date": "2026-02-09",
-        "claim_count_analyzed": 20,
-        "technology_domain": "VTOL Aircraft - Electric Propulsion - Convertible Flight",
-        "key_innovations": [
-            "Ducted/shrouded tilt-rotor propulsion assembly",
-            "Foldable wings rotating about lengthwise (spanwise) axis",
-            "Paddle-based directional control with stanchion rotation",
-            "Boom-centric architecture with vertical/horizontal orientation capability",
-            "Integrated electrical payload power delivery system with dual-function airfoil rudder"
-        ],
-        "primary_technical_advantages": [
-            "VTOL capability without runway requirements",
-            "Efficient cruise flight via horizontal flight mode",
-            "Compact storage via wing folding mechanism",
-            "Enhanced safety through shrouded rotor design",
-            "Zero-emission electric propulsion",
-            "In-flight payload power delivery",
-            "Multi-functional design elements (payload connector as rudder)"
-        ]
+        "expanded_cpc_count": 10,
+        "total_keywords_generated": 60,
+        "query_count": 10
     }
 }
