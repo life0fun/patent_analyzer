@@ -12,6 +12,33 @@
 please analyze the two patent claims under claims folder, claims/claim_a.txt and claims/claim_b.txt. Compare the features of two patents and generate a report on the differences and similarities. 
 ```
 
+## Context Window Memory
+
+The reasoning between steps happens entirely inside the LLM's context window.
+Tool call response is appended to memory after act(). The next_step_prompt is added to memory before think(); The think LLM call has a full memory of history.
+
+```
+    tool_msg = Message.tool_message(content=result,...)         
+    self.memory.add_message(tool_msg)  # ← written into message history
+
+    if self.next_step_prompt:
+        user_msg = Message.user_message(self.next_step_prompt)
+        self.messages += [user_msg]
+
+    # LLM gets: system + all prior messages + tool results + next_step_prompt
+    response = await self.llm.ask_tool(messages, system_msgs, tools, ...)
+```
+
+[system]
+[user: original step request]
+[user: next_step_prompt]          ← injected by think() #1
+[assistant: tool_call{...}]       ← LLM response in think() #1
+[tool: "Observed output..."]      ← written by act() #1
+[user: next_step_prompt]          ← injected by think() #2  ← always here
+[assistant: tool_call{...}]       ← LLM response in think() #2
+[tool: "Observed output..."]      ← written by act() #2
+[user: next_step_prompt]          ← injected by think() #3
+
 ## Log
 2026-02-28 08:48:21.076 | INFO     | app.flow.planning:_create_initial_plan:137 - Creating initial plan with ID: plan_1772297301
 2026-02-28 08:48:24.366 | INFO     | app.flow.planning:_create_initial_plan:196 - Plan creation result: Plan created successfully with ID: plan_1772297301

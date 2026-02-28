@@ -50,7 +50,7 @@ class ToolCallAgent(ReActAgent):
     description: str = "an agent that can execute tool calls."
 
     system_prompt: str = SYSTEM_PROMPT
-    next_step_prompt: str = NEXT_STEP_PROMPT
+    next_step_prompt: str = NEXT_STEP_PROMPT  # appended after tool message
 
     available_tools: ToolCollection = ToolCollection(
         CreateChatCompletion(), Terminate()
@@ -65,7 +65,7 @@ class ToolCallAgent(ReActAgent):
     max_observe: Optional[Union[int, bool]] = None
 
     async def think(self) -> bool:
-        """Process current state and decide next actions using tools"""
+        """next step prompt appended after tool message, then llm will think"""
         if self.next_step_prompt:
             user_msg = Message.user_message(self.next_step_prompt)
             self.messages += [user_msg]
@@ -179,7 +179,7 @@ class ToolCallAgent(ReActAgent):
                 f"🎯 Tool '{command.function.name}' completed its mission! Result: {result}"
             )
 
-            # Add tool response to memory
+            # Add tool response to memory, next LLM think will reason on it.
             tool_msg = Message.tool_message(
                 content=result,
                 tool_call_id=command.id,

@@ -4,7 +4,7 @@ from pydantic import Field, model_validator
 from app.config import config
 from app.logger import logger
 from app.prompt.master import NEXT_STEP_PROMPT, SYSTEM_PROMPT
-from app.tools import Terminate, ToolCollection, StrReplaceEditor
+from app.tools import Terminate, ToolCollection, StrReplaceEditor, CompleteStepTool
 from app.subagents.react_toolcall import ToolCallAgent
 from app.subagents.mcp import MCPAgent
 from app.subagents.capability import AgentCapability
@@ -25,12 +25,13 @@ class MasterAgent(ToolCallAgent):
     available_tools: ToolCollection = Field(
         default_factory=lambda: ToolCollection(
             StrReplaceEditor(),
+            CompleteStepTool(),   # replaces Terminate — reports step outcome  
             Terminate(),
         )
     )
 
     max_observe: int = 10000
-    max_steps: int = 2
+    max_steps: int = 1  # planner agent will plan each step clearly. MasterAgent will execute each step once.
     _initialized: bool = False  # async wait for dependencies to be initialized
 
     @classmethod
@@ -78,17 +79,31 @@ class MasterAgent(ToolCallAgent):
             ],
         )
 
+    def reset_for_new_step(self) -> None:
+        """
+        Clear per-step memory so the LLM starts fresh for each plan step.
+        Called by PlanningFlow._execute_step() before executor.run().
+
+        Without this, the LLM sees its entire history and tends to say
+        "I already did this in a previous step" instead of executing the task.
+        The system_prompt (which includes global context) is preserved because
+        it is injected separately by think() via system_msgs, not stored in memory.
+        """
+        self.memory.clear()
+        logger.debug(f"🔄 {self.name} memory reset for new step")
+
     async def think(self) -> bool:
         """Process current state and decide next actions with appropriate context."""
         if not self._initialized:
             return False
 
+        # defensive save next_step_prompt to avoid downstream modification.
         original_prompt = self.next_step_prompt
         recent_messages = self.memory.messages[-3:] if self.memory.messages else []
         
         result = await super().think()
 
-        # Restore original prompt
+        # Restore original next_step_prompt so it can be injected next think.
         self.next_step_prompt = original_prompt
 
         return result

@@ -19,7 +19,6 @@ ROLE_TYPE = Literal[ROLE_VALUES]  # type: ignore
 
 class ToolChoice(str, Enum):
     """Tool choice options"""
-
     NONE = "none"
     AUTO = "auto"
     REQUIRED = "required"
@@ -31,11 +30,54 @@ TOOL_CHOICE_TYPE = Literal[TOOL_CHOICE_VALUES]  # type: ignore
 
 class AgentState(str, Enum):
     """Agent execution states"""
-
     IDLE = "IDLE"
     RUNNING = "RUNNING"
     FINISHED = "FINISHED"
     ERROR = "ERROR"
+
+class StepStatus(str, Enum):
+    """
+    Outcome of a single plan step execution reported by MasterAgent.
+    Distinct from PlanStepStatus which is the planner-side tracking enum.
+    """
+    SUCCESS  = "success"   # step completed, output is valid
+    FAILED   = "failed"    # step attempted but could not complete (tool error, etc.)
+    PARTIAL  = "partial"   # some work done but not fully complete (e.g. MCP unavailable)
+    SKIPPED  = "skipped"   # step was not applicable / already done
+
+class StepResult(BaseModel):
+    """
+    Structured result MasterAgent returns to PlanningFlow after executing a step.
+
+    MasterAgent produces this by calling the CompleteStepTool, which serializes it
+    and hands it back as the final tool result.  PlanningFlow deserializes it and
+    decides the next action.
+
+    Example (success):
+        StepResult(
+            status=StepStatus.SUCCESS,
+            output="Extracted 5 features from claim_a.txt",
+        )
+
+    Example (failed):
+        StepResult(
+            status=StepStatus.FAILED,
+            output="",
+            error="MCP server unavailable: 'ClaimAnalyzer' has no attribute 'parser'",
+            should_retry=True,
+        )
+    """
+    status:       StepStatus        = Field(...,   description="Outcome of the step")
+    output:       str               = Field("",    description="Human-readable result / summary")
+    error:        Optional[str]     = Field(None,  description="Error message if status != SUCCESS")
+    should_retry: bool              = Field(False, description="Hint to planner: worth retrying?")
+    step_index:   Optional[int]     = Field(None,  description="Which plan step this result is for")
+
+    def is_success(self) -> bool:
+        return self.status == StepStatus.SUCCESS
+
+    def is_failed(self) -> bool:
+        return self.status in (StepStatus.FAILED, StepStatus.PARTIAL)
 
 
 class Function(BaseModel):

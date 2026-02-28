@@ -4,6 +4,7 @@ from app.tools.planning import PlanningTool
 from app.tools.terminate import Terminate
 from app.tools.tool_collection import ToolCollection
 from app.tools.str_replace_editor import StrReplaceEditor
+from app.tools.complete_step import CompleteStepTool
 
 __all__ = [
     "BaseTool",
@@ -13,6 +14,7 @@ __all__ = [
     #"BrowserUseTool",
     "Terminate",
     "StrReplaceEditor",
+    "CompleteStepTool",
     #"WebSearch",
     "ToolCollection",
     "CreateChatCompletion",
