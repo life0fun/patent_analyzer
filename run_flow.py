@@ -1,6 +1,9 @@
 import asyncio
 import time
 
+import sys
+print(sys.path)
+
 from app.subagents.master_agent import MasterAgent
 from app.config import config
 from app.flow.flow_factory import FlowFactory, FlowType

@@ -1,0 +1,24 @@
+# Patent Claims Comparison Report
+
+## Similarities
+1. **Method Type**: Both claims describe a method for controlling or operating an aerial vehicle (UAV or drone).
+2. **Signal Reception**: Both involve receiving a signal (first signal from a remote controller in claim_a and command signal from a user device in claim_b).
+3. **Path/Route Calculation**: Both involve calculating a path or route (flight path in claim_a and alternative route in claim_b).
+4. **Propulsion Control**: Both involve controlling a propulsion system to move the vehicle along the calculated path or route.
+
+## Differences
+1. **Vehicle Type**:
+   - **claim_a.txt**: Focuses on an unmanned aerial vehicle (UAV).
+   - **claim_b.txt**: Refers to a drone.
+
+2. **Signal Source**:
+   - **claim_a.txt**: Receives a signal from a remote controller.
+   - **claim_b.txt**: Receives a command signal from a user device.
+
+3. **Path/Route Calculation**:
+   - **claim_a.txt**: Calculates a flight path to a target location.
+   - **claim_b.txt**: Computes an alternative route to a destination after detecting an obstacle.
+
+4. **Obstacle Detection**:
+   - **claim_a.txt**: Does not mention obstacle detection.
+   - **claim_b.txt**: Includes detecting an obstacle in a projected path.

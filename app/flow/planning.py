@@ -11,6 +11,7 @@ from app.llm import LLM
 from app.logger import logger
 from app.schema import AgentState, Message, ToolChoice
 from app.tools.planning import PlanningTool
+from app.prompt.planning import SYSTEM_PROMPT
 
 
 class PlanStepStatus(str, Enum):
@@ -136,11 +137,12 @@ class PlanningFlow(BaseFlow):
         """Create an initial plan based on the request using the flow's LLM and PlanningTool."""
         logger.info(f"Creating initial plan with ID: {self.active_plan_id}")
 
-        system_message_content = (
-            "You are a planning assistant. Create a concise, actionable plan with clear steps. "
-            "Focus on key milestones rather than detailed sub-steps. "
-            "Optimize for clarity and efficiency."
-        )
+        # system_message_content = (
+        #     "You are a planning assistant. Create a concise, actionable plan with clear steps. "
+        #     "Focus on key milestones rather than detailed sub-steps. "
+        #     "Optimize for clarity and efficiency."
+        # )
+        system_message_content = SYSTEM_PROMPT
         agents_description = []
         for key in self.executor_keys:
             if key in self.agents:

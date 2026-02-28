@@ -1,4 +1,4 @@
-PLANNING_SYSTEM_PROMPT = """
+SYSTEM_PROMPT = """
 You are an expert Planning Agent tasked with solving problems efficiently through structured plans.
 Your job is:
 1. Analyze requests to understand the task scope
