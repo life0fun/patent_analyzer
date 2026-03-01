@@ -1,4 +1,5 @@
 import logging
+import os
 import uvicorn
 import json
 
@@ -73,7 +74,7 @@ async def handle_call_tool(name: str, arguments: dict | None) -> list[TextConten
     
     elif name == "extract_features":
         text = arguments.get("claim_text", "")
-        features = await claim_analyzer.parser.extract_features(text)
+        features = await claim_analyzer.claim_feature_extractor.extract_features(text)
         return [TextContent(type="text", text=json.dumps(features))]
         
     elif name == "compare_features":

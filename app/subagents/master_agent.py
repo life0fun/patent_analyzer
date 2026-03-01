@@ -31,7 +31,7 @@ class MasterAgent(ToolCallAgent):
     )
 
     max_observe: int = 10000
-    max_steps: int = 1  # planner agent will plan each step clearly. MasterAgent will execute each step once.
+    max_steps: int = 2  # planner agent will plan each step clearly. MasterAgent will execute each step once.
     _initialized: bool = False  # async wait for dependencies to be initialized
 
     @classmethod
@@ -48,6 +48,10 @@ class MasterAgent(ToolCallAgent):
             connection_type="sse",
             server_url="http://0.0.0.0:8000/sse",
         )
+        # Give McpAgent file-reading and terminate tools.
+        # MCPClients inherits from ToolCollection, so add_tool() works directly.
+        mcp_agent.mcp_clients.add_tool(StrReplaceEditor())
+        mcp_agent.mcp_clients.add_tool(Terminate())
 
         instance.subagents = {
             "McpAgent": mcp_agent,
@@ -107,3 +111,13 @@ class MasterAgent(ToolCallAgent):
         self.next_step_prompt = original_prompt
 
         return result
+
+    async def cleanup(self) -> None:
+        """Clean up all subagents and resources."""
+        logger.info(f"🧹 MasterAgent cleaning up {len(self.subagents)} subagents...")
+        for name, agent in self.subagents.items():
+            try:
+                await agent.cleanup()
+            except Exception as e:
+                logger.error(f"Error cleaning up subagent {name}: {e}")
+        await super().cleanup()

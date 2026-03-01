@@ -30,6 +30,7 @@ class MCPAgent(ToolCallAgent):
 
     max_steps: int = 5   # MCP subagent shall just execute single tool call per master delegation..
     connection_type: str = "sse"  # "stdio" or "sse"
+    server_url: Optional[str] = None  # stored so run() can reconnect after cleanup
 
     # Track tool schemas to detect changes
     tool_schemas: Dict[str, Dict[str, Any]] = Field(default_factory=dict)
@@ -60,6 +61,7 @@ class MCPAgent(ToolCallAgent):
         if self.connection_type == "sse":
             if not server_url:
                 raise ValueError("Server URL is required for SSE connection")
+            self.server_url = server_url  # remember for reconnection
             await self.mcp_clients.connect_sse(server_url=server_url)
         elif self.connection_type == "stdio":
             if not command:
@@ -191,15 +193,19 @@ class MCPAgent(ToolCallAgent):
 
     async def cleanup(self) -> None:
         """Clean up MCP connection when done."""
+        await super().cleanup()
         if self.mcp_clients.sessions:
             await self.mcp_clients.disconnect()
             logger.info("MCP connection closed")
 
     async def run(self, request: Optional[str] = None) -> str:
-        """Run the agent with cleanup when done."""
-        try:
-            result = await super().run(request)
-            return result
-        finally:
-            # Ensure cleanup happens even if there's an error
-            await self.cleanup()
+        """Run the agent, reconnecting to MCP if a previous cleanup() disconnected it."""
+        # Re-establish the MCP connection if cleanup() closed it between steps.
+        if not self.mcp_clients.sessions and self.server_url:
+            logger.info(f"Reconnecting to MCP server {self.server_url}")
+            await self.mcp_clients.connect_sse(server_url=self.server_url)
+            self.available_tools = self.mcp_clients
+            await self._refresh_tools()
+
+        result = await super().run(request)
+        return result

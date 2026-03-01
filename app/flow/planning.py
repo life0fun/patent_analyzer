@@ -57,6 +57,9 @@ class PlanningFlow(BaseFlow):
     max_step_retries: int = Field(default=1)
     _step_retry_counts: Dict[int, int] = {}
 
+    # Accumulated outputs from completed steps — passed as context to later steps
+    step_outputs: Dict[int, str] = Field(default_factory=dict)
+
     def __init__(
         self,
         agents: Union[BaseAgent, List[BaseAgent], Dict[str, BaseAgent]],
@@ -75,6 +78,7 @@ class PlanningFlow(BaseFlow):
             self.executor_keys = list(self.agents.keys())
 
         self._step_retry_counts = {}
+        self.step_outputs = {}
 
     def get_executor(self, step_type: Optional[str] = None) -> BaseAgent:
         if step_type and step_type in self.agents:
@@ -268,12 +272,26 @@ class PlanningFlow(BaseFlow):
     def _build_step_prompt(self, step_info: dict) -> str:
         """
         Build the prompt handed to MasterAgent for a single step.
-        Explicitly instructs MasterAgent to call complete_step when done.
+        Includes outputs from all previously completed steps as context.
         """
         step_text = step_info.get("text", "")
         step_index = step_info.get("index", "?")
 
+        prior_context = ""
+        if self.step_outputs:
+            lines = []
+            for idx in sorted(self.step_outputs):
+                lines.append(f"### Step {idx} output\n{self.step_outputs[idx]}")
+            prior_context = (
+                "## Results from Previous Steps\n"
+                "(Use this information directly — do not re-read files or re-run tools "
+                "that have already produced results below.)\n\n"
+                + "\n\n".join(lines)
+                + "\n\n"
+            )
+
         return (
+            f"{prior_context}"
             f"## Current Task (Plan Step {step_index})\n\n"
             f"{step_text}\n\n"
             f"## Instructions\n"
@@ -353,12 +371,14 @@ class PlanningFlow(BaseFlow):
         # ── SUCCESS ──────────────────────────────────────────────────────────
         if step_result.status == StepStatus.SUCCESS:
             logger.info(f"✅ Step {step_index} completed successfully.")
-            await self._mark_step_completed(step_index)
+            self.step_outputs[step_index] = step_result.output
+            await self._mark_step_completed(step_index, notes=step_result.output)
             return step_result.output
 
         # ── SKIPPED ──────────────────────────────────────────────────────────
         if step_result.status == StepStatus.SKIPPED:
             logger.info(f"⏭ Step {step_index} skipped: {step_result.output}")
+            self.step_outputs[step_index] = step_result.output
             await self._mark_step_completed(step_index)
             return step_result.output
 
@@ -368,6 +388,7 @@ class PlanningFlow(BaseFlow):
                 f"⚡ Step {step_index} partially completed. "
                 f"Error: {step_result.error}. Marking completed and continuing."
             )
+            self.step_outputs[step_index] = step_result.output
             await self._mark_step_completed(step_index)
             return step_result.output
 
@@ -408,7 +429,9 @@ class PlanningFlow(BaseFlow):
         await self._mark_step_completed(step_index)
         return raw_output or ""
 
-    async def _mark_step_completed(self, step_index: Optional[int] = None) -> None:
+    async def _mark_step_completed(
+        self, step_index: Optional[int] = None, notes: Optional[str] = None
+    ) -> None:
         """Mark the given step (or the current step) as completed."""
         idx = step_index if step_index is not None else self.current_step_index
         if idx is None:
@@ -421,6 +444,7 @@ class PlanningFlow(BaseFlow):
                 plan_id=self.active_plan_id,
                 step_index=idx,
                 step_status=PlanStepStatus.COMPLETED.value,
+                step_notes=notes,
             )
             logger.info(
                 f"Marked step {idx} as completed in plan {self.active_plan_id}"
@@ -431,14 +455,20 @@ class PlanningFlow(BaseFlow):
             if self.active_plan_id in self.planning_tool.plans:
                 plan_data = self.planning_tool.plans[self.active_plan_id]
                 step_statuses = plan_data.get("step_statuses", [])
+                step_notes = plan_data.get("step_notes", [])
 
-                # Ensure the step_statuses list is long enough
+                # Ensure the lists are long enough
                 while len(step_statuses) <= idx:
                     step_statuses.append(PlanStepStatus.NOT_STARTED.value)
+                while len(step_notes) <= idx:
+                    step_notes.append("")
 
-                # Update the status
+                # Update the status and notes
                 step_statuses[idx] = PlanStepStatus.COMPLETED.value
+                if notes:
+                    step_notes[idx] = notes
                 plan_data["step_statuses"] = step_statuses
+                plan_data["step_notes"] = step_notes
 
     async def _get_plan_text(self) -> str:
         """Get the current plan as formatted text."""
@@ -528,7 +558,10 @@ class PlanningFlow(BaseFlow):
             )
 
             return f"Plan completed:\n\n{response}"
-        except Exception as e:
+        except (Exception, BaseException) as e:
+            if type(e).__name__ in ("CancelledError", "Cancelled"):
+                logger.warning("Final summary LLM call was cancelled — returning plan text directly.")
+                return f"Plan completed:\n\n{plan_text}"
             logger.error(f"Error finalizing plan with LLM: {e}")
 
             # Fallback to using an agent for the summary
@@ -543,6 +576,19 @@ class PlanningFlow(BaseFlow):
                 """
                 summary = await agent.run(summary_prompt)
                 return f"Plan completed:\n\n{summary}"
-            except Exception as e2:
+            except (Exception, BaseException) as e2:
+                if type(e2).__name__ in ("CancelledError", "Cancelled"):
+                    logger.warning("Fallback summary also cancelled — returning plan text directly.")
+                    return f"Plan completed:\n\n{plan_text}"
                 logger.error(f"Error finalizing plan with agent: {e2}")
                 return "Plan completed. Error generating summary."
+
+    async def cleanup(self) -> None:
+        """Clean up all agents and resources used in the flow."""
+        logger.info(f"🧹 PlanningFlow cleaning up {len(self.agents)} agents...")
+        for name, agent in self.agents.items():
+            try:
+                if hasattr(agent, "cleanup"):
+                    await agent.cleanup()
+            except Exception as e:
+                logger.error(f"Error cleaning up agent {name}: {e}")
