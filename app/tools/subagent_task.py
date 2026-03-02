@@ -66,5 +66,6 @@ class SubAgentTaskTool(BaseTool):
         if agent is None:
             raise ValueError(f"Subagent '{subagent}' not found")
 
-        # Delegate control to the agent
+        # Delegate control to the agent. SubAgent can invoke multiple tool call steps, and each tool call result is added to agent's memory. 
+        # When SubAgent think() decides to finish, it will call complete_step tool, pass the summarized result from all tool call steps and return the final result to master agent.
         return await agent.run(request=task)

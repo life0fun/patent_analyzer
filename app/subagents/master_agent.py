@@ -31,7 +31,7 @@ class MasterAgent(ToolCallAgent):
     )
 
     max_observe: int = 10000
-    max_steps: int = 2  # planner agent will plan each step clearly. MasterAgent will execute each step once.
+    max_steps: int = 6  # planner agent will plan each step clearly. MasterAgent will execute each step once.
     _initialized: bool = False  # async wait for dependencies to be initialized
 
     @classmethod
@@ -64,6 +64,9 @@ class MasterAgent(ToolCallAgent):
 
         # MasterAgent does not know MCP tools, only knows delegation tool
         instance.available_tools.add_tool(subagent_task_tool)
+        complete_step_tool = CompleteStepTool()
+        complete_step_tool._agent = instance        # ← inject here, once
+        instance.available_tools.add_tool(complete_step_tool)
 
         instance._initialized = True
         return instance

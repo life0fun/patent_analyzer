@@ -10,7 +10,7 @@ from app.llm import LLM
 from app.logger import logger
 from app.prompt.toolcall import NEXT_STEP_PROMPT, SYSTEM_PROMPT
 from app.schema import TOOL_CHOICE_TYPE, AgentState, Message, Memory, ToolCall, ToolChoice
-from app.tools import CreateChatCompletion, Terminate, ToolCollection
+from app.tools import CreateChatCompletion, Terminate, ToolCollection, CompleteStepTool
 
 TOOL_CALL_REQUIRED = "Tool calls required but none provided"
 
@@ -36,7 +36,7 @@ class ReActAgent(BaseAgent, ABC):
     async def act(self) -> str:
         """Execute decided actions"""
 
-    async def step(self) -> str:
+    async def step(self) -> str: # return tool call results.
         """Execute a single step: think and act."""
         should_act = await self.think()
         if not should_act:
@@ -56,7 +56,7 @@ class ToolCallAgent(ReActAgent):
         CreateChatCompletion(), Terminate()
     )
     tool_choices: TOOL_CHOICE_TYPE = ToolChoice.AUTO  # type: ignore
-    special_tool_names: List[str] = Field(default_factory=lambda: [Terminate().name])
+    special_tool_names: List[str] = Field(default_factory=lambda: [CompleteStepTool().name, Terminate().name])
 
     tool_calls: List[ToolCall] = Field(default_factory=list)
     _current_base64_image: Optional[str] = None
@@ -65,13 +65,13 @@ class ToolCallAgent(ReActAgent):
     max_observe: Optional[Union[int, bool]] = None
 
     async def think(self) -> bool:
-        """next step prompt appended after tool message, then llm will think"""
+        """next step prompt appended after user msg or prev tool call result message, then llm will think and decide next action"""
         if self.next_step_prompt:
             user_msg = Message.user_message(self.next_step_prompt)
             self.messages += [user_msg]
 
         try:
-            # Get response with tool options
+            # Ask LLM which tool to call and its args
             response = await self.llm.ask_tool(
                 messages=self.messages,
                 system_msgs=(
@@ -99,7 +99,7 @@ class ToolCallAgent(ReActAgent):
                 self.state = AgentState.FINISHED
                 return False
             raise
-
+        # store tool calls for act() to use.
         self.tool_calls = tool_calls = (
             response.tool_calls if response and response.tool_calls else []
         )
@@ -120,7 +120,7 @@ class ToolCallAgent(ReActAgent):
             if response is None:
                 raise RuntimeError("No response received from the LLM")
 
-            # Handle different tool_choices modes
+            # Handle different toopl_choices modes
             if self.tool_choices == ToolChoice.NONE:
                 if tool_calls:
                     logger.warning(

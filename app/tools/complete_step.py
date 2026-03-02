@@ -35,7 +35,7 @@ makes an informed decision about what to do next.
 """
 
 import json
-from typing import ClassVar, Optional
+from typing import ClassVar, Optional, Any
 
 from pydantic import Field
 
@@ -77,6 +77,8 @@ class CompleteStepTool(BaseTool):
 
     name: str = "complete_step"
     description: str = _COMPLETE_STEP_DESCRIPTION
+    # agent reference injected so it can set state
+    _agent: Optional[Any] = None
 
     # Marker prefix so PlanningFlow can reliably detect a StepResult payload
     # even if the LLM adds surrounding text.
@@ -120,14 +122,17 @@ class CompleteStepTool(BaseTool):
         except ValueError:
             step_status = StepStatus.FAILED
             error = f"Invalid status value '{status}' provided to complete_step"
-
-        result = StepResult(
+        # wrap tool call argument(output) as the tool result.
+        result = StepResult( 
             status=step_status,
             output=output,
             error=error,
             should_retry=should_retry,
         )
-
+        # Signal the run() loop to stop — same mechanism as Terminate
+        if self._agent:
+            self._agent.state = AgentState.FINISHED
+        
         # Embed serialized result with a known prefix so PlanningFlow can parse it
         payload = f"{self.RESULT_PREFIX}{result.model_dump_json()}"
         return ToolResult(output=payload)

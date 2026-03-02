@@ -16,141 +16,92 @@ detecting an obstacle in a projected path;
 computing an alternative route to the destination; and
 controlling a propulsion system to move the drone along the alternative route.
 ```
-[{"FeatureType": "Technology Domain", "ExtractedFeature": "Unmanned aerial vehicle control system", "Keywords": ["UAV", "control system"], "IPCCPCcodes": ["B64C39/02", "G05D1/10"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Receiving a first signal from a remote controller", "Keywords": ["signal", "remote controller"], "IPCCPCcodes": ["G05D1/00"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Identifying a target location based on the first signal", "Keywords": ["target location", "signal"], "IPCCPCcodes": ["G01S19/10"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Calculating a flight path to the target location", "Keywords": ["flight path", "calculation"], "IPCCPCcodes": ["G05D1/10"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Actuating a motor to propel the UAV along the flight path", "Keywords": ["motor", "propel", "flight path"], "IPCCPCcodes": ["B64C27/08"], "ClaimNumber": 1}]
-[{"FeatureType": "Technology Domain", "ExtractedFeature": "Drone operation and navigation technology", "Keywords": ["drone", "operation", "navigation"], "IPCCPCcodes": ["B64C39/02", "G05D1/00"], "ClaimNumber": 1}, {"FeatureType": "Key Innovation", "ExtractedFeature": "Computing an alternative route when an obstacle is detected", "Keywords": ["alternative route", "obstacle detection"], "IPCCPCcodes": ["G05D1/10", "G08G1/0967"], "ClaimNumber": 1}, {"FeatureType": "Embodiment", "ExtractedFeature": "Receiving a command signal from a user device to operate the drone", "Keywords": ["command signal", "user device"], "IPCCPCcodes": ["G05D1/02", "H04W4/02"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Controlling a propulsion system to navigate the drone", "Keywords": ["propulsion system", "drone control"], "IPCCPCcodes": ["B64C39/02", "G05D1/00"], "ClaimNumber": 1}]
-Comparison of features from the two patent claims:
+[{"FeatureType": "Technology Domain", "ExtractedFeature": "Control method for unmanned aerial vehicles (UAVs)", "Keywords": ["control method", "UAV"], "IPCCPCcodes": ["B64C39/02", "G05D1/10"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Receiving a first signal from a remote controller for command input", "Keywords": ["signal", "remote controller"], "IPCCPCcodes": ["G08G5/00"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Identifying a target location based on the first signal", "Keywords": ["target location", "signal"], "IPCCPCcodes": ["G05D1/10"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Calculating a flight path to the target location", "Keywords": ["flight path", "calculation"], "IPCCPCcodes": ["G08G5/00"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Actuating a motor to propel the UAV along the flight path", "Keywords": ["actuate", "motor", "propel", "UAV"], "IPCCPCcodes": ["B64C29/00", "G05D1/10"], "ClaimNumber": 1}]
+[{"FeatureType": "Technology Domain", "ExtractedFeature": "Drone operation method", "Keywords": ["drone", "operation method"], "IPCCPCcodes": ["B64C39/02", "B64C2201/229"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Receiving a command signal from a user device", "Keywords": ["command signal", "user device"], "IPCCPCcodes": ["H04W4/02", "B64C2201/12"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Determining a destination based on the command signal", "Keywords": ["destination", "command signal"], "IPCCPCcodes": ["G01C21/00", "B64C2201/142"], "ClaimNumber": 1}, {"FeatureType": "Key Innovation", "ExtractedFeature": "Detecting an obstacle in a projected path", "Keywords": ["detecting obstacle", "projected path"], "IPCCPCcodes": ["G05D1/10", "B64C2201/18"], "ClaimNumber": 1}, {"FeatureType": "Key Innovation", "ExtractedFeature": "Computing an alternative route to the destination", "Keywords": ["computing alternative route"], "IPCCPCcodes": ["G06T7/20", "B64C2201/54"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Controlling a propulsion system to move the drone along the alternative route", "Keywords": ["controlling propulsion system", "move drone"], "IPCCPCcodes": ["B64C27/08", "B64C2201/52"], "ClaimNumber": 1}]
+{
+  "matches": [
+    {
+      "feature_a": "Technology Domain: Control method for unmanned aerial vehicles (UAVs)",
+      "feature_b": "Technology Domain: Drone operation method",
+      "score": 0.85,
+      "explanation": "Both describe the technology domain relating to UAV/drone control and operation."
+    },
+    {
+      "feature_a": "Means of Realization: Receiving a first signal from a remote controller for command input",
+      "feature_b": "Means of Realization: Receiving a command signal from a user device",
+      "score": 0.9,
+      "explanation": "Both involve receiving command signals, although the exact device is unspecified."
+    },
+    {
+      "feature_a": "Means of Realization: Identifying a target location based on the first signal",
+      "feature_b": "Means of Realization: Determining a destination based on the command signal",
+      "score": 0.8,
+      "explanation": "Both involve determining a location or destination based on a received signal."
+    },
+    {
+      "feature_a": "Means of Realization: Calculating a flight path to the target location",
+      "feature_b": "Key Innovation: Computing an alternative route to the destination",
+      "score": 0.6,
+      "explanation": "Both involve path calculation, though B specifies calculation of alternative paths, which is more specific."
+    },
+    {
+      "feature_a": "Means of Realization: Actuating a motor to propel the UAV along the flight path",
+      "feature_b": "Means of Realization: Controlling a propulsion system to move the drone along the alternative route",
+      "score": 0.75,
+      "explanation": "Both relate to controlling propulsion to follow a designated path. B specifies alternative routes."
+    }
+  ],
+  "overall_similarity": 0.78,
+  "unmatched_a": [],
+  "unmatched_b": [
+    "Key Innovation: Detecting an obstacle in a projected path"
+  ]
+}
+The comparison of the features of the two patent claims identified the following differences:
 
-### Claim A Features:
-1. **Technology Domain**: Unmanned aerial vehicle control system
-   - Keywords: UAV, control system
-   - IPCCPC codes: B64C39/02, G05D1/10
-2. **Means of Realization**: Receiving a first signal from a remote controller
-   - Keywords: signal, remote controller
-   - IPCCPC codes: G05D1/00
-3. **Means of Realization**: Identifying a target location based on the first signal
-   - Keywords: target location, signal
-   - IPCCPC codes: G01S19/10
-4. **Means of Realization**: Calculating a flight path to the target location
-   - Keywords: flight path, calculation
-   - IPCCPC codes: G05D1/10
-5. **Means of Realization**: Actuating a motor to propel the UAV along the flight path
-   - Keywords: motor, propel, flight path
-   - IPCCPC codes: B64C27/08
+1. **Technology Domain**:
+   - Both claims describe the technology domain relating to UAV/drone control and operation with a similarity score of 0.85.
 
-### Claim B Features:
-1. **Technology Domain**: Drone operation and navigation technology
-   - Keywords: drone, operation, navigation
-   - IPCCPC codes: B64C39/02, G05D1/00
-2. **Key Innovation**: Computing an alternative route when an obstacle is detected
-   - Keywords: alternative route, obstacle detection
-   - IPCCPC codes: G05D1/10, G08G1/0967
-3. **Embodiment**: Receiving a command signal from a user device to operate the drone
-   - Keywords: command signal, user device
-   - IPCCPC codes: G05D1/02, H04W4/02
-4. **Means of Realization**: Controlling a propulsion system to navigate the drone
-   - Keywords: propulsion system, drone control
-   - IPCCPC codes: B64C39/02, G05D1/00
+2. **Means of Realization**:
+   - Both claims involve receiving command signals, with claim A specifying a remote controller and claim B specifying a user device. Similarity score: 0.9.
+   - Both claims involve determining a location or destination based on a received signal. Similarity score: 0.8.
+   - Claim A involves calculating a flight path to the target location, while claim B specifies computing an alternative route to the destination, which is more specific. Similarity score: 0.6.
+   - Both claims relate to controlling propulsion to follow a designated path, with claim B specifying alternative routes. Similarity score: 0.75.
 
-### Similarities:
-- Both claims involve technology related to unmanned aerial vehicles or drones, specifically focusing on control and navigation systems.
-- Both claims include receiving a signal (from a remote controller or user device) as a means of operation.
-- Both claims involve calculating or computing a path or route for the UAV/drone.
-- Both claims involve controlling a propulsion system to move the UAV/drone along a determined path.
-- Both claims share the IPCCPC code B64C39/02, indicating a focus on aircraft control systems.
-Comparison of features from the two patent claims:
+3. **Unmatched Features**:
+   - Claim B includes a key innovation of detecting an obstacle in a projected path, which is not present in claim A.
 
-### Claim A Features:
-1. **Technology Domain**: Unmanned aerial vehicle control system
-   - Keywords: UAV, control system
-   - IPCCPC codes: B64C39/02, G05D1/10
-2. **Means of Realization**: Receiving a first signal from a remote controller
-   - Keywords: signal, remote controller
-   - IPCCPC codes: G05D1/00
-3. **Means of Realization**: Identifying a target location based on the first signal
-   - Keywords: target location, signal
-   - IPCCPC codes: G01S19/10
-4. **Means of Realization**: Calculating a flight path to the target location
-   - Keywords: flight path, calculation
-   - IPCCPC codes: G05D1/10
-5. **Means of Realization**: Actuating a motor to propel the UAV along the flight path
-   - Keywords: motor, propel, flight path
-   - IPCCPC codes: B64C27/08
+Overall similarity score between the claims is 0.78.
+The comparison of the features of the two patent claims identified the following differences:
 
-### Claim B Features:
-1. **Technology Domain**: Drone operation and navigation technology
-   - Keywords: drone, operation, navigation
-   - IPCCPC codes: B64C39/02, G05D1/00
-2. **Key Innovation**: Computing an alternative route when an obstacle is detected
-   - Keywords: alternative route, obstacle detection
-   - IPCCPC codes: G05D1/10, G08G1/0967
-3. **Embodiment**: Receiving a command signal from a user device to operate the drone
-   - Keywords: command signal, user device
-   - IPCCPC codes: G05D1/02, H04W4/02
-4. **Means of Realization**: Controlling a propulsion system to navigate the drone
-   - Keywords: propulsion system, drone control
-   - IPCCPC codes: B64C39/02, G05D1/00
+1. **Technology Domain**:
+   - Both claims describe the technology domain relating to UAV/drone control and operation with a similarity score of 0.85.
 
-### Similarities:
-- Both claims involve technology related to unmanned aerial vehicles or drones, specifically focusing on control and navigation systems.
-- Both claims include receiving a signal (from a remote controller or user device) as a means of operation.
-- Both claims involve calculating or computing a path or route for the UAV/drone.
-- Both claims involve controlling a propulsion system to move the UAV/drone along a determined path.
-- Both claims share the IPCCPC code B64C39/02, indicating a focus on aircraft control systems.
-Comparison of features from the two patent claims:
+2. **Means of Realization**:
+   - Both claims involve receiving command signals, with claim A specifying a remote controller and claim B specifying a user device. Similarity score: 0.9.
+   - Both claims involve determining a location or destination based on a received signal. Similarity score: 0.8.
+   - Claim A involves calculating a flight path to the target location, while claim B specifies computing an alternative route to the destination, which is more specific. Similarity score: 0.6.
+   - Both claims relate to controlling propulsion to follow a designated path, with claim B specifying alternative routes. Similarity score: 0.75.
 
-### Claim A Features:
-1. **Technology Domain**: Unmanned aerial vehicle control system
-   - Keywords: UAV, control system
-   - IPCCPC codes: B64C39/02, G05D1/10
-2. **Means of Realization**: Receiving a first signal from a remote controller
-   - Keywords: signal, remote controller
-   - IPCCPC codes: G05D1/00
-3. **Means of Realization**: Identifying a target location based on the first signal
-   - Keywords: target location, signal
-   - IPCCPC codes: G01S19/10
-4. **Means of Realization**: Calculating a flight path to the target location
-   - Keywords: flight path, calculation
-   - IPCCPC codes: G05D1/10
-5. **Means of Realization**: Actuating a motor to propel the UAV along the flight path
-   - Keywords: motor, propel, flight path
-   - IPCCPC codes: B64C27/08
+3. **Unmatched Features**:
+   - Claim B includes a key innovation of detecting an obstacle in a projected path, which is not present in claim A.
 
-### Claim B Features:
-1. **Technology Domain**: Drone operation and navigation technology
-   - Keywords: drone, operation, navigation
-   - IPCCPC codes: B64C39/02, G05D1/00
-2. **Key Innovation**: Computing an alternative route when an obstacle is detected
-   - Keywords: alternative route, obstacle detection
-   - IPCCPC codes: G05D1/10, G08G1/0967
-3. **Embodiment**: Receiving a command signal from a user device to operate the drone
-   - Keywords: command signal, user device
-   - IPCCPC codes: G05D1/02, H04W4/02
-4. **Means of Realization**: Controlling a propulsion system to navigate the drone
-   - Keywords: propulsion system, drone control
-   - IPCCPC codes: B64C39/02, G05D1/00
-
-### Similarities:
-- Both claims involve technology related to unmanned aerial vehicles or drones, specifically focusing on control and navigation systems.
-- Both claims include receiving a signal (from a remote controller or user device) as a means of operation.
-- Both claims involve calculating or computing a path or route for the UAV/drone.
-- Both claims involve controlling a propulsion system to move the UAV/drone along a determined path.
-- Both claims share the IPCCPC code B64C39/02, indicating a focus on aircraft control systems.
+Overall similarity score between the claims is 0.78.
 Plan completed:
 
-The completed plan, "Analyze and Compare Patent Claims" (ID: plan_1772328841), successfully achieved its objective by completing all six steps. The plan involved a detailed analysis and comparison of two patent claims related to unmanned aerial vehicles (UAVs) and drones. 
+The completed plan, "Analyze and Compare Patent Claims" (ID: plan_1772413484), successfully executed all six steps, achieving a 100% completion rate. The plan involved analyzing two patent claims related to UAV/drone technology, specifically focusing on their methods of operation.
 
 Key accomplishments include:
 
-1. **Identification and Access**: The two patent claims files, claim_a.txt and claim_b.txt, were identified and accessed. Each file contained a detailed description of a method for controlling UAVs or drones.
+1. **Identification and Access**: The two patent claim files, claim_a.txt and claim_b.txt, were identified and accessed.
 
-2. **Feature Extraction**: Key features were extracted from both claims. Claim A focused on a UAV control system, while Claim B emphasized drone operation and navigation technology. Features such as technology domain, means of realization, and key innovations were identified and categorized.
+2. **Feature Extraction**: Key features were extracted from both claims. Claim A focused on a control method for UAVs, while Claim B described a drone operation method. Both claims shared similarities in receiving command signals and determining destinations based on these signals.
 
-3. **Comparison of Features**: The features of both claims were compared to identify similarities and differences. Both claims shared a focus on UAV/drone control and navigation systems, receiving signals for operation, and controlling propulsion systems. However, Claim B introduced a key innovation of computing alternative routes when obstacles are detected.
+3. **Comparison of Features**: The features of the two claims were compared to identify similarities and differences. The overall similarity score was 0.78, indicating a moderate level of similarity. Both claims shared commonalities in technology domain and means of realization, such as signal reception and propulsion control. However, Claim B included a unique feature of detecting obstacles, which was absent in Claim A.
 
-4. **Report Generation**: A comprehensive report was generated summarizing the similarities and differences between the two patent claims. This report highlighted the shared technological focus and operational methods, as well as the unique aspects of each claim.
+4. **Report Generation**: A comprehensive report was generated, summarizing the similarities and differences between the two patent claims, highlighting the shared technology domain and the unique innovation in Claim B.
 
-Final Thoughts:
-The plan was executed efficiently, providing a clear understanding of the technological and operational similarities and differences between the two patent claims. This analysis can aid in further research, development, or legal considerations related to UAV and drone technologies.
+Final Thoughts: The analysis provided valuable insights into the similarities and differences between the two patent claims, which could be useful for further research, development, or legal considerations in the field of UAV/drone technology. The process demonstrated the importance of detailed feature extraction and comparison in understanding patent claims.
 
 ========================================
 DETAILED STEP RESULTS
@@ -177,131 +128,83 @@ controlling a propulsion system to move the drone along the alternative route.
 ```
 
 ### Step 1 Output
-[{"FeatureType": "Technology Domain", "ExtractedFeature": "Unmanned aerial vehicle control system", "Keywords": ["UAV", "control system"], "IPCCPCcodes": ["B64C39/02", "G05D1/10"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Receiving a first signal from a remote controller", "Keywords": ["signal", "remote controller"], "IPCCPCcodes": ["G05D1/00"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Identifying a target location based on the first signal", "Keywords": ["target location", "signal"], "IPCCPCcodes": ["G01S19/10"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Calculating a flight path to the target location", "Keywords": ["flight path", "calculation"], "IPCCPCcodes": ["G05D1/10"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Actuating a motor to propel the UAV along the flight path", "Keywords": ["motor", "propel", "flight path"], "IPCCPCcodes": ["B64C27/08"], "ClaimNumber": 1}]
+[{"FeatureType": "Technology Domain", "ExtractedFeature": "Control method for unmanned aerial vehicles (UAVs)", "Keywords": ["control method", "UAV"], "IPCCPCcodes": ["B64C39/02", "G05D1/10"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Receiving a first signal from a remote controller for command input", "Keywords": ["signal", "remote controller"], "IPCCPCcodes": ["G08G5/00"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Identifying a target location based on the first signal", "Keywords": ["target location", "signal"], "IPCCPCcodes": ["G05D1/10"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Calculating a flight path to the target location", "Keywords": ["flight path", "calculation"], "IPCCPCcodes": ["G08G5/00"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Actuating a motor to propel the UAV along the flight path", "Keywords": ["actuate", "motor", "propel", "UAV"], "IPCCPCcodes": ["B64C29/00", "G05D1/10"], "ClaimNumber": 1}]
 
 ### Step 2 Output
-[{"FeatureType": "Technology Domain", "ExtractedFeature": "Drone operation and navigation technology", "Keywords": ["drone", "operation", "navigation"], "IPCCPCcodes": ["B64C39/02", "G05D1/00"], "ClaimNumber": 1}, {"FeatureType": "Key Innovation", "ExtractedFeature": "Computing an alternative route when an obstacle is detected", "Keywords": ["alternative route", "obstacle detection"], "IPCCPCcodes": ["G05D1/10", "G08G1/0967"], "ClaimNumber": 1}, {"FeatureType": "Embodiment", "ExtractedFeature": "Receiving a command signal from a user device to operate the drone", "Keywords": ["command signal", "user device"], "IPCCPCcodes": ["G05D1/02", "H04W4/02"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Controlling a propulsion system to navigate the drone", "Keywords": ["propulsion system", "drone control"], "IPCCPCcodes": ["B64C39/02", "G05D1/00"], "ClaimNumber": 1}]
+[{"FeatureType": "Technology Domain", "ExtractedFeature": "Drone operation method", "Keywords": ["drone", "operation method"], "IPCCPCcodes": ["B64C39/02", "B64C2201/229"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Receiving a command signal from a user device", "Keywords": ["command signal", "user device"], "IPCCPCcodes": ["H04W4/02", "B64C2201/12"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Determining a destination based on the command signal", "Keywords": ["destination", "command signal"], "IPCCPCcodes": ["G01C21/00", "B64C2201/142"], "ClaimNumber": 1}, {"FeatureType": "Key Innovation", "ExtractedFeature": "Detecting an obstacle in a projected path", "Keywords": ["detecting obstacle", "projected path"], "IPCCPCcodes": ["G05D1/10", "B64C2201/18"], "ClaimNumber": 1}, {"FeatureType": "Key Innovation", "ExtractedFeature": "Computing an alternative route to the destination", "Keywords": ["computing alternative route"], "IPCCPCcodes": ["G06T7/20", "B64C2201/54"], "ClaimNumber": 1}, {"FeatureType": "Means of Realization", "ExtractedFeature": "Controlling a propulsion system to move the drone along the alternative route", "Keywords": ["controlling propulsion system", "move drone"], "IPCCPCcodes": ["B64C27/08", "B64C2201/52"], "ClaimNumber": 1}]
 
 ### Step 3 Output
-Comparison of features from the two patent claims:
-
-### Claim A Features:
-1. **Technology Domain**: Unmanned aerial vehicle control system
-   - Keywords: UAV, control system
-   - IPCCPC codes: B64C39/02, G05D1/10
-2. **Means of Realization**: Receiving a first signal from a remote controller
-   - Keywords: signal, remote controller
-   - IPCCPC codes: G05D1/00
-3. **Means of Realization**: Identifying a target location based on the first signal
-   - Keywords: target location, signal
-   - IPCCPC codes: G01S19/10
-4. **Means of Realization**: Calculating a flight path to the target location
-   - Keywords: flight path, calculation
-   - IPCCPC codes: G05D1/10
-5. **Means of Realization**: Actuating a motor to propel the UAV along the flight path
-   - Keywords: motor, propel, flight path
-   - IPCCPC codes: B64C27/08
-
-### Claim B Features:
-1. **Technology Domain**: Drone operation and navigation technology
-   - Keywords: drone, operation, navigation
-   - IPCCPC codes: B64C39/02, G05D1/00
-2. **Key Innovation**: Computing an alternative route when an obstacle is detected
-   - Keywords: alternative route, obstacle detection
-   - IPCCPC codes: G05D1/10, G08G1/0967
-3. **Embodiment**: Receiving a command signal from a user device to operate the drone
-   - Keywords: command signal, user device
-   - IPCCPC codes: G05D1/02, H04W4/02
-4. **Means of Realization**: Controlling a propulsion system to navigate the drone
-   - Keywords: propulsion system, drone control
-   - IPCCPC codes: B64C39/02, G05D1/00
-
-### Similarities:
-- Both claims involve technology related to unmanned aerial vehicles or drones, specifically focusing on control and navigation systems.
-- Both claims include receiving a signal (from a remote controller or user device) as a means of operation.
-- Both claims involve calculating or computing a path or route for the UAV/drone.
-- Both claims involve controlling a propulsion system to move the UAV/drone along a determined path.
-- Both claims share the IPCCPC code B64C39/02, indicating a focus on aircraft control systems.
+{
+  "matches": [
+    {
+      "feature_a": "Technology Domain: Control method for unmanned aerial vehicles (UAVs)",
+      "feature_b": "Technology Domain: Drone operation method",
+      "score": 0.85,
+      "explanation": "Both describe the technology domain relating to UAV/drone control and operation."
+    },
+    {
+      "feature_a": "Means of Realization: Receiving a first signal from a remote controller for command input",
+      "feature_b": "Means of Realization: Receiving a command signal from a user device",
+      "score": 0.9,
+      "explanation": "Both involve receiving command signals, although the exact device is unspecified."
+    },
+    {
+      "feature_a": "Means of Realization: Identifying a target location based on the first signal",
+      "feature_b": "Means of Realization: Determining a destination based on the command signal",
+      "score": 0.8,
+      "explanation": "Both involve determining a location or destination based on a received signal."
+    },
+    {
+      "feature_a": "Means of Realization: Calculating a flight path to the target location",
+      "feature_b": "Key Innovation: Computing an alternative route to the destination",
+      "score": 0.6,
+      "explanation": "Both involve path calculation, though B specifies calculation of alternative paths, which is more specific."
+    },
+    {
+      "feature_a": "Means of Realization: Actuating a motor to propel the UAV along the flight path",
+      "feature_b": "Means of Realization: Controlling a propulsion system to move the drone along the alternative route",
+      "score": 0.75,
+      "explanation": "Both relate to controlling propulsion to follow a designated path. B specifies alternative routes."
+    }
+  ],
+  "overall_similarity": 0.78,
+  "unmatched_a": [],
+  "unmatched_b": [
+    "Key Innovation: Detecting an obstacle in a projected path"
+  ]
+}
 
 ### Step 4 Output
-Comparison of features from the two patent claims:
+The comparison of the features of the two patent claims identified the following differences:
 
-### Claim A Features:
-1. **Technology Domain**: Unmanned aerial vehicle control system
-   - Keywords: UAV, control system
-   - IPCCPC codes: B64C39/02, G05D1/10
-2. **Means of Realization**: Receiving a first signal from a remote controller
-   - Keywords: signal, remote controller
-   - IPCCPC codes: G05D1/00
-3. **Means of Realization**: Identifying a target location based on the first signal
-   - Keywords: target location, signal
-   - IPCCPC codes: G01S19/10
-4. **Means of Realization**: Calculating a flight path to the target location
-   - Keywords: flight path, calculation
-   - IPCCPC codes: G05D1/10
-5. **Means of Realization**: Actuating a motor to propel the UAV along the flight path
-   - Keywords: motor, propel, flight path
-   - IPCCPC codes: B64C27/08
+1. **Technology Domain**:
+   - Both claims describe the technology domain relating to UAV/drone control and operation with a similarity score of 0.85.
 
-### Claim B Features:
-1. **Technology Domain**: Drone operation and navigation technology
-   - Keywords: drone, operation, navigation
-   - IPCCPC codes: B64C39/02, G05D1/00
-2. **Key Innovation**: Computing an alternative route when an obstacle is detected
-   - Keywords: alternative route, obstacle detection
-   - IPCCPC codes: G05D1/10, G08G1/0967
-3. **Embodiment**: Receiving a command signal from a user device to operate the drone
-   - Keywords: command signal, user device
-   - IPCCPC codes: G05D1/02, H04W4/02
-4. **Means of Realization**: Controlling a propulsion system to navigate the drone
-   - Keywords: propulsion system, drone control
-   - IPCCPC codes: B64C39/02, G05D1/00
+2. **Means of Realization**:
+   - Both claims involve receiving command signals, with claim A specifying a remote controller and claim B specifying a user device. Similarity score: 0.9.
+   - Both claims involve determining a location or destination based on a received signal. Similarity score: 0.8.
+   - Claim A involves calculating a flight path to the target location, while claim B specifies computing an alternative route to the destination, which is more specific. Similarity score: 0.6.
+   - Both claims relate to controlling propulsion to follow a designated path, with claim B specifying alternative routes. Similarity score: 0.75.
 
-### Similarities:
-- Both claims involve technology related to unmanned aerial vehicles or drones, specifically focusing on control and navigation systems.
-- Both claims include receiving a signal (from a remote controller or user device) as a means of operation.
-- Both claims involve calculating or computing a path or route for the UAV/drone.
-- Both claims involve controlling a propulsion system to move the UAV/drone along a determined path.
-- Both claims share the IPCCPC code B64C39/02, indicating a focus on aircraft control systems.
+3. **Unmatched Features**:
+   - Claim B includes a key innovation of detecting an obstacle in a projected path, which is not present in claim A.
+
+Overall similarity score between the claims is 0.78.
 
 ### Step 5 Output
-Comparison of features from the two patent claims:
+The comparison of the features of the two patent claims identified the following differences:
 
-### Claim A Features:
-1. **Technology Domain**: Unmanned aerial vehicle control system
-   - Keywords: UAV, control system
-   - IPCCPC codes: B64C39/02, G05D1/10
-2. **Means of Realization**: Receiving a first signal from a remote controller
-   - Keywords: signal, remote controller
-   - IPCCPC codes: G05D1/00
-3. **Means of Realization**: Identifying a target location based on the first signal
-   - Keywords: target location, signal
-   - IPCCPC codes: G01S19/10
-4. **Means of Realization**: Calculating a flight path to the target location
-   - Keywords: flight path, calculation
-   - IPCCPC codes: G05D1/10
-5. **Means of Realization**: Actuating a motor to propel the UAV along the flight path
-   - Keywords: motor, propel, flight path
-   - IPCCPC codes: B64C27/08
+1. **Technology Domain**:
+   - Both claims describe the technology domain relating to UAV/drone control and operation with a similarity score of 0.85.
 
-### Claim B Features:
-1. **Technology Domain**: Drone operation and navigation technology
-   - Keywords: drone, operation, navigation
-   - IPCCPC codes: B64C39/02, G05D1/00
-2. **Key Innovation**: Computing an alternative route when an obstacle is detected
-   - Keywords: alternative route, obstacle detection
-   - IPCCPC codes: G05D1/10, G08G1/0967
-3. **Embodiment**: Receiving a command signal from a user device to operate the drone
-   - Keywords: command signal, user device
-   - IPCCPC codes: G05D1/02, H04W4/02
-4. **Means of Realization**: Controlling a propulsion system to navigate the drone
-   - Keywords: propulsion system, drone control
-   - IPCCPC codes: B64C39/02, G05D1/00
+2. **Means of Realization**:
+   - Both claims involve receiving command signals, with claim A specifying a remote controller and claim B specifying a user device. Similarity score: 0.9.
+   - Both claims involve determining a location or destination based on a received signal. Similarity score: 0.8.
+   - Claim A involves calculating a flight path to the target location, while claim B specifies computing an alternative route to the destination, which is more specific. Similarity score: 0.6.
+   - Both claims relate to controlling propulsion to follow a designated path, with claim B specifying alternative routes. Similarity score: 0.75.
 
-### Similarities:
-- Both claims involve technology related to unmanned aerial vehicles or drones, specifically focusing on control and navigation systems.
-- Both claims include receiving a signal (from a remote controller or user device) as a means of operation.
-- Both claims involve calculating or computing a path or route for the UAV/drone.
-- Both claims involve controlling a propulsion system to move the UAV/drone along a determined path.
-- Both claims share the IPCCPC code B64C39/02, indicating a focus on aircraft control systems.
+3. **Unmatched Features**:
+   - Claim B includes a key innovation of detecting an obstacle in a projected path, which is not present in claim A.
+
+Overall similarity score between the claims is 0.78.
 
