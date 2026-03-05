@@ -9,9 +9,11 @@ from mcp.server.sse import SseServerTransport
 from mcp.server import Server
 from mcp.types import Tool, TextContent, ImageContent, EmbeddedResource
 from app.tools.mcp_tools.claim_analyzer import ClaimAnalyzer
+from app.tools.mcp_tools.function_way_result import FunctionWayResultAnalyzer
 
 server = Server("LLM Patent Analyzer")
 claim_analyzer = ClaimAnalyzer()
+function_way_result_analyzer = FunctionWayResultAnalyzer()
 
 @server.list_tools()
 async def handle_list_tools() -> list[Tool]:
@@ -40,23 +42,17 @@ async def handle_list_tools() -> list[Tool]:
             },
         ),
         Tool(
-            name="compare_features",
-            description="Compares two lists of features.",
+            name="function_way_result_analysis",
+            description="Analyzes the function way result of claims of a patent.",
             inputSchema={
                 "type": "object",
                 "properties": {
-                    "features_a": {
-                        "type": "array",
-                        "items": {"type": "string"},
-                        "description": "List of features from Claim A"
-                    },
-                    "features_b": {
-                        "type": "array",
-                        "items": {"type": "string"},
-                        "description": "List of features from Claim B"
+                    "claims": {
+                        "type": "string",
+                        "description": "Claims of a patent"
                     },
                 },
-                "required": ["features_a", "features_b"],
+                "required": ["claims"],
             },
         )
     ]
@@ -77,26 +73,10 @@ async def handle_call_tool(name: str, arguments: dict | None) -> list[TextConten
         features = await claim_analyzer.claim_feature_extractor.extract_features(text)
         return [TextContent(type="text", text=json.dumps(features))]
         
-    elif name == "compare_features":
-        def parse_features(val):
-            if isinstance(val, list):
-                return val
-            if isinstance(val, str):
-                try:
-                    return json.loads(val)
-                except:
-                    return [val]
-            return []
-
-        try:
-            feats_a = parse_features(arguments.get("features_a", []))
-            feats_b = parse_features(arguments.get("features_b", []))
-            result = await claim_analyzer.feature_comparator.compare(feats_a, feats_b)
-            return [TextContent(type="text", text=json.dumps(result, indent=2))]
-        except Exception as e:
-            return [TextContent(type="text", text=f"Error parsing features: {e}")]
-
-    return [TextContent(type="text", text="Unknown tool")]
+    elif name == "function_way_result_analysis":
+        claims = arguments.get("claims", [])
+        result = await function_way_result_analyzer.analyze(claims)
+        return [TextContent(type="text", text=result)]
 
 
 # 2. SSE Transport Setup
