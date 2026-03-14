@@ -129,7 +129,7 @@ class PlanningFlow(BaseFlow):
 
     async def _create_initial_plan(self, request: str) -> None:
         """Create an initial plan based on the request using the flow's LLM and PlanningTool."""
-        logger.info(f"Creating initial plan with ID: {self.active_plan_id}")
+        logger.info(f"Creating initial plan with ID: {self.active_plan_id} for request {request}")
 
         # system_message_content = (
         #     "You are a planning assistant. Create a concise, actionable plan with clear steps. "
@@ -193,17 +193,8 @@ class PlanningFlow(BaseFlow):
                     return
 
         # If execution reached here, create a default plan
-        logger.warning("Creating default plan")
-
-        # Create default plan using the ToolCollection
-        await self.planning_tool.execute(
-            **{
-                "command": "create",
-                "plan_id": self.active_plan_id,
-                "title": f"Plan for: {request[:50]}{'...' if len(request) > 50 else ''}",
-                "steps": ["Analyze request", "Execute task", "Verify results"],
-            }
-        )
+        logger.warning("No Plan Created, Aborting")
+        return 
 
     async def _get_current_step_info(self) -> tuple[Optional[int], Optional[dict]]:
         """
@@ -233,6 +224,7 @@ class PlanningFlow(BaseFlow):
                 if status in PlanStepStatus.get_active_statuses():
                     # Extract step type/category if available
                     step_info = {"text": step}
+                    step_info["index"] = i
 
                     # Try to extract step type from the text (e.g., [SEARCH] or [CODE])
                     import re
@@ -356,7 +348,7 @@ class PlanningFlow(BaseFlow):
         # ── No StepResult embedded (MasterAgent didn't call complete_step) ──
         if step_result is None:
             logger.warning(
-                f"⚠ Step {step_index} did not return a StepResult "
+                f"⚠ Plan Step {step_index} did not return a StepResult "
                 f"(MasterAgent may not have called complete_step). "
                 f"Marking completed with caution."
             )
@@ -364,20 +356,20 @@ class PlanningFlow(BaseFlow):
             return raw_output or ""
 
         logger.info(
-            f"Step {step_index} result: status={step_result.status.value} "
+            f"Plan Step {step_index} result: status={step_result.status.value} "
             + (f"| error={step_result.error}" if step_result.error else "")
         )
 
         # ── SUCCESS ──────────────────────────────────────────────────────────
         if step_result.status == StepStatus.SUCCESS:
-            logger.info(f"✅ Step {step_index} completed successfully.")
+            logger.info(f"✅ Plan Step {step_index} completed successfully.")
             self.step_outputs[step_index] = step_result.output
             await self._mark_step_completed(step_index, notes=step_result.output)
             return step_result.output
 
         # ── SKIPPED ──────────────────────────────────────────────────────────
         if step_result.status == StepStatus.SKIPPED:
-            logger.info(f"⏭ Step {step_index} skipped: {step_result.output}")
+            logger.info(f"⏭ Plan Step {step_index} skipped: {step_result.output}")
             self.step_outputs[step_index] = step_result.output
             await self._mark_step_completed(step_index)
             return step_result.output
@@ -385,7 +377,7 @@ class PlanningFlow(BaseFlow):
         # ── PARTIAL ──────────────────────────────────────────────────────────
         if step_result.status == StepStatus.PARTIAL:
             logger.warning(
-                f"⚡ Step {step_index} partially completed. "
+                f"⚡ Plan Step {step_index} partially completed. "
                 f"Error: {step_result.error}. Marking completed and continuing."
             )
             self.step_outputs[step_index] = step_result.output
@@ -400,7 +392,7 @@ class PlanningFlow(BaseFlow):
                 # Reset to not_started so _get_current_step_info() picks it up again
                 self._step_retry_counts[step_index] = retry_count + 1
                 logger.warning(
-                    f"🔄 Step {step_index} failed (retry {retry_count + 1}/"
+                    f"🔄 Plan Step {step_index} failed (retry {retry_count + 1}/"
                     f"{self.max_step_retries}): {step_result.error}"
                 )
                 await self.planning_tool.execute(
@@ -414,7 +406,7 @@ class PlanningFlow(BaseFlow):
             else:
                 # Non-retryable failure or retries exhausted → mark BLOCKED
                 logger.error(
-                    f"❌ Step {step_index} failed and will be blocked. "
+                    f"❌ Plan Step {step_index} failed and will be blocked. "
                     f"Error: {step_result.error}"
                 )
                 await self.planning_tool.execute(
@@ -447,7 +439,7 @@ class PlanningFlow(BaseFlow):
                 step_notes=notes,
             )
             logger.info(
-                f"Marked step {idx} as completed in plan {self.active_plan_id}"
+                f"Marked Plan step {idx} as completed in plan {self.active_plan_id}"
             )
         except Exception as e:
             logger.warning(f"Failed to update plan status: {e}")

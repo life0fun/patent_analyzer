@@ -39,7 +39,7 @@ from typing import ClassVar, Optional, Any
 
 from pydantic import Field
 
-from app.schema import StepResult, StepStatus
+from app.schema import AgentState, StepResult, StepStatus
 from app.tools.base import BaseTool, ToolResult
 
 

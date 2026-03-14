@@ -27,9 +27,21 @@ class MCPClientTool(BaseTool):
         try:
             logger.info(f"MCP client session call_tool on MCP server: {self.original_name}")
             result = await self.session.call_tool(self.original_name, kwargs)
+
+            # Log raw content items to diagnose truncation issues
+            for i, item in enumerate(result.content):
+                if isinstance(item, TextContent):
+                    logger.info(f"MCP result content[{i}] ({len(item.text)} chars): {item.text[:200]}{'...' if len(item.text) > 200 else ''}")
+
             content_str = ", ".join(
                 item.text for item in result.content if isinstance(item, TextContent)
             )
+
+            if getattr(result, "isError", False):
+                logger.error(f"MCP server returned error for {self.original_name}: {content_str}")
+                return ToolResult(error=f"MCP server error: {content_str}")
+
+            logger.info(f"MCP result total length: {len(content_str)} chars")
             return ToolResult(output=content_str or "No output returned.")
         except Exception as e:
             return ToolResult(error=f"Error executing tool: {str(e)}")

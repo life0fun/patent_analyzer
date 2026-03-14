@@ -79,6 +79,7 @@ class MCPAgent(ToolCallAgent):
         # Add system message about available tools
         tool_names = list(self.mcp_clients.tool_map.keys())
         tools_info = ", ".join(tool_names)
+        logger.info(f"MCP Agent Available MCP tools_info: {tools_info}")
 
         # Add MCPAgent system prompt with available tools information
         self.memory.add_message(
@@ -144,7 +145,7 @@ class MCPAgent(ToolCallAgent):
             ],
             affordances=[
                 "Patent claim comparison based on patent feature comparison",
-                "Patent claim analysis based on patent feature analysis",
+                "Patent claim function-way-result analysis",
                 "Patent claim feature extraction",
             ],
             limitations=[

@@ -31,7 +31,7 @@ class MasterAgent(ToolCallAgent):
     )
 
     max_observe: int = 10000
-    max_steps: int = 6  # planner agent will plan each step clearly. MasterAgent will execute each step once.
+    max_steps: int = 5  # This is agent loop steps, not plan steps. At least 2 needed: step 1 = subagent_task, step 2 = complete_step. Step 3 allows one recovery step.
     _initialized: bool = False  # async wait for dependencies to be initialized
 
     @classmethod
@@ -69,6 +69,7 @@ class MasterAgent(ToolCallAgent):
         instance.available_tools.add_tool(complete_step_tool)
 
         instance._initialized = True
+        logger.info(f" ** MasterAgent created with available tools {instance.available_tools.to_params()}")
         return instance
 
     def describe(self) -> AgentCapability:
@@ -79,7 +80,7 @@ class MasterAgent(ToolCallAgent):
                 "solve patent related tasks in steps using subagents and tools",
             ],
             affordances=[
-                "Patent analysis and FTO check.",
+                "Patent claim analysis and Doctrine of Equivent check using function-way-result analysis.",
             ],
             limitations=[
                 "Only Patent related tasks so far",
@@ -88,8 +89,8 @@ class MasterAgent(ToolCallAgent):
 
     def reset_for_new_step(self) -> None:
         """
-        Clear per-step memory so the LLM starts fresh for each plan step.
         Called by PlanningFlow._execute_step() before executor.run().
+        Clear per-step memory so the LLM starts fresh for each plan step.
 
         Without this, the LLM sees its entire history and tends to say
         "I already did this in a previous step" instead of executing the task.

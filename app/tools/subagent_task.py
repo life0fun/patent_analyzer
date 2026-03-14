@@ -2,6 +2,7 @@ from typing import Any, Dict
 
 from app.tools import BaseTool
 from pydantic import Field
+from app.schema import AgentState
 from app.subagents.capability import AgentCapability
 from app.subagents.base import BaseAgent
 
@@ -66,6 +67,40 @@ class SubAgentTaskTool(BaseTool):
         if agent is None:
             raise ValueError(f"Subagent '{subagent}' not found")
 
-        # Delegate control to the agent. SubAgent can invoke multiple tool call steps, and each tool call result is added to agent's memory. 
-        # When SubAgent think() decides to finish, it will call complete_step tool, pass the summarized result from all tool call steps and return the final result to master agent.
-        return await agent.run(request=task)
+        # Run the subagent. Each tool call result is added to agent's memory as a
+        # tool message. base.run() returns a formatted "Step N: ..." summary string
+        # which buries the actual payload. We extract the real tool message content
+        # from memory instead so MasterAgent receives the clean result.
+        await agent.run(request=task)
+
+        # Snapshot memory before resetting — we need to read results from it.
+        messages_snapshot = list(agent.memory.messages)
+
+        # Reset agent so it can be reused on the next plan-step delegation.
+        # Without this, base.run() raises RuntimeError("Cannot run agent from state: FINISHED")
+        # because terminate set agent.state = FINISHED.
+        agent.state = AgentState.IDLE
+        agent.current_step = 0
+        agent.memory.clear()
+
+        # Collect all tool-role messages (actual tool outputs) from the snapshot,
+        # excluding terminate calls which carry no useful payload.
+        tool_results = [
+            msg.content
+            for msg in messages_snapshot
+            if msg.role == "tool"
+            and msg.content
+            and "terminate" not in (msg.name or "").lower()
+        ]
+
+        if tool_results:
+            # Return the last meaningful tool result (the analysis output)
+            return tool_results[-1]
+
+        # Fallback: no tool messages found, return the last assistant message
+        assistant_results = [
+            msg.content
+            for msg in messages_snapshot
+            if msg.role == "assistant" and msg.content
+        ]
+        return assistant_results[-1] if assistant_results else "No result returned by subagent."

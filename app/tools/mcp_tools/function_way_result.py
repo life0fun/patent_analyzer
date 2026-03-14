@@ -16,30 +16,39 @@ class FunctionWayResultAnalyzer:
             model="gpt-4o"
         )
     
-    async def analyze(self, claim_text: str) -> Dict:
+    async def analyze(self, claims: str) -> list | dict:
         """
         Performs a granular "Function-Way-Result" (FWR) decomposition of the provided patent claims.
+        Returns a list of FWR component dicts (or a dict if the LLM returns one).
         """
-        if not claim_text:
-            return {}
+        if not claims:
+            return []
         
-        prompt = INSTRUCTIONS.format(claim_text=claim_text)
+        prompt = INSTRUCTIONS.format(claims=claims)
         
-        result = await Runner.run(self.agent, prompt)
-        response_text = result.final_output
+        try:
+            result = await Runner.run(self.agent, prompt)
+            response_text = result.final_output
+        except Exception as e:
+            import traceback
+            print(f"ERROR: Runner.run failed: {e}\n{traceback.format_exc()}")
+            raise
         
         try:
             # Clean up potential markdown formatting
             clean_json = response_text.replace("```json", "").replace("```", "").strip()
-            result_dict = json.loads(clean_json)
+            result_obj = json.loads(clean_json)
             
-            # Validate and normalize the result
-            if not isinstance(result_dict, dict):
-                raise ValueError("LLM response is not a dictionary")
-            
-            return result_dict
+            # Accept both list (array of FWR elements) and dict
+            if isinstance(result_obj, (list, dict)):
+                print(f"----- MCP FWR analysis returns type={type(result_obj).__name__}, {len(result_obj)} items")
+                return result_obj
+            else:
+                raise ValueError(f"LLM response is neither list nor dict: {type(result_obj)}")
             
         except (json.JSONDecodeError, ValueError) as e:
             print(f"Warning: Failed to parse LLM response: {e}")
             print(f"Raw response: {response_text}")
+            raise
+
             

@@ -74,9 +74,16 @@ async def handle_call_tool(name: str, arguments: dict | None) -> list[TextConten
         return [TextContent(type="text", text=json.dumps(features))]
         
     elif name == "function_way_result_analysis":
-        claims = arguments.get("claims", [])
-        result = await function_way_result_analyzer.analyze(claims)
-        return [TextContent(type="text", text=result)]
+        claims = arguments.get("claims", "")
+        try:
+            result = await function_way_result_analyzer.analyze(claims)
+            logging.info(f"FWR analyze() returned type={type(result).__name__}, value={str(result)[:200]}")
+            return [TextContent(type="text", text=json.dumps(result))]
+        except Exception as e:
+            import traceback
+            tb = traceback.format_exc()
+            logging.error(f"function_way_result_analysis FAILED: {e}\n{tb}")
+            raise
 
 
 # 2. SSE Transport Setup

@@ -140,6 +140,7 @@ class BaseAgent(BaseModel, ABC):
         self.current_step = 0
         if request:
             self.update_memory("user", request)
+            logger.info(f"{self.name} start run with user request: {request}")
 
         results: List[str] = []
         async with self.state_context(AgentState.RUNNING):
@@ -147,7 +148,7 @@ class BaseAgent(BaseModel, ABC):
                 self.current_step < self.max_steps and self.state != AgentState.FINISHED
             ):
                 self.current_step += 1
-                logger.info(f"{self.name} Executing step {self.current_step}/{self.max_steps}")
+                logger.info(f"{self.name} Agent loop step {self.current_step}/{self.max_steps}")
                 step_result = await self.step()  # step result is tool call results.
 
                 # Check for stuck state
