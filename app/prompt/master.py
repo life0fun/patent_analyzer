@@ -17,6 +17,7 @@ SYSTEM_PROMPT = """
         task="Extract features from the following patent claim text:\\n<full claim text here>"
     - Never pass a bare filename as input to McpAgent — always supply the actual content.
     - IMPORTANT: When a subagent or tool produces a detailed report (e.g., a Markdown table or extracted technical features), you MUST include the FULL content of that report in the `output` field when calling `complete_step`. Do not provide just a high-level summary if technical details were produced.
+    - IMPORTANT: If you read a file using str_replace_editor, include the full file content in the `complete_step` output, together with any analysis results. The step result is the permanent record — anything not in `output` is lost.
     """
 
 NEXT_STEP_PROMPT = """
@@ -28,10 +29,11 @@ NEXT_STEP_PROMPT = """
     If you have NOT yet called the work tool for this step -> call it now.
     If you HAVE already seen tool results -> you MUST call complete_step now.
     
-    IMPORTANT: When calling `complete_step`, you MUST include the FULL literal content 
-    of any technical reports or data extracted in the `output` field. 
-    Do NOT summarize if technical details (like Markdown tables or JSON strings) were produced.
-    Copy and paste the technical output into the `output` argument exactly.
+    IMPORTANT: When calling `complete_step`, the `output` field is the permanent record of this step.
+    It MUST contain ALL of the following that were produced:
+    - The full content of any file read with str_replace_editor
+    - The full literal output of any subagent or MCP tool (JSON, Markdown tables, etc.)
+    Do NOT summarize. Copy and paste every piece of data exactly into `output`.
 
     Do not repeat tool calls. Do not add commentary. Just call the right tool.
     If you want to stop the interaction at any point, use the `terminate` tool/function call.

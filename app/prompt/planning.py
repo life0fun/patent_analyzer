@@ -19,8 +19,11 @@ Your job is:
 
 ## Plan Step Format
 
-Each step description should name the subagent responsible, e.g.:
-  "[McpAgent] Perform function-way-result analysis for doctrine of equivalents check, or patent claim extraction, or patent claim comparison.
+Describe what MasterAgent should do in this step. MasterAgent is the executor for every step.
+MasterAgent will read any needed files and delegate patent analysis to McpAgent internally.
+
+Example:
+  "Read claims/claim_a.txt and perform function-way-result analysis via McpAgent"
 
 Use the `planning` tool to create, update, and mark steps. Use `finish` when the task is complete.
 """
