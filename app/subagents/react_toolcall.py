@@ -71,7 +71,7 @@ class ToolCallAgent(ReActAgent):
             self.messages += [user_msg]
 
         try:
-            # Ask LLM which tool to call and its args
+            # Ask LLM with the message history in memory so far what to do next, i.e, which tool to call with what args
             response = await self.llm.ask_tool(
                 messages=self.messages,
                 system_msgs=(
@@ -106,7 +106,7 @@ class ToolCallAgent(ReActAgent):
         content = response.content if response and response.content else "empty response.content in tool call mode"
 
         # Log response info
-        logger.info(f"✨ {self.name}'s thoughts: {content}")
+        logger.info(f"✨ {self.name} think() llm.ask_tool response.content: {content}")
         logger.info(
             f"🛠️ {self.name} selected {len(tool_calls) if tool_calls else 0} tools to use"
         )
@@ -176,10 +176,10 @@ class ToolCallAgent(ReActAgent):
                 result = result[: self.max_observe]
 
             logger.info(
-                f"🎯 Tool '{command.function.name}' completed its mission! Result: {result}"
+                f"🎯 Tool '{command.function.name}' completed its mission! Append tool call result to memory as tool message, {'role': 'tool', 'content': {result}}"
             )
 
-            # Add tool response to memory, next LLM think will reason on it.
+            # Append tool call result to memory as tool message, {'role': 'tool', 'content': ...}, next turn LLM think will reason on it next tool call.
             tool_msg = Message.tool_message(
                 content=result,
                 tool_call_id=command.id,

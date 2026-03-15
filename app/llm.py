@@ -727,6 +727,7 @@ class LLM:
                 )
 
             params["stream"] = False  # Always use non-streaming for tool requests
+            logger.debug(f"✨ llm.ask_tool sending messages: {params['messages']}")
             response: ChatCompletion = await self.client.chat.completions.create(
                 **params
             )

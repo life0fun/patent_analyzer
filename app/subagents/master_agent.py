@@ -107,7 +107,6 @@ class MasterAgent(ToolCallAgent):
 
         # defensive save next_step_prompt to avoid downstream modification.
         original_prompt = self.next_step_prompt
-        recent_messages = self.memory.messages[-3:] if self.memory.messages else []
         
         result = await super().think()
 

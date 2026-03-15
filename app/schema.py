@@ -94,7 +94,7 @@ class ToolCall(BaseModel):
 
 
 class Message(BaseModel):
-    """Represents a chat message in the conversation"""
+    """Represents a chat message in the conversation between agent and LLM during agent loop. system message, user message, assistant message, tool message"""
 
     role: ROLE_TYPE = Field(...)  # type: ignore
     content: Optional[str] = Field(default=None)
@@ -199,6 +199,7 @@ class Message(BaseModel):
 
 
 class Memory(BaseModel):
+    """Memory for storing conversation history messages. Agent append messages to memory after each turn in agent loop."""
     messages: List[Message] = Field(default_factory=list)
     max_messages: int = Field(default=100)
 

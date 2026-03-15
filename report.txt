@@ -1,76 +1,69 @@
 ### Content of claim_a.txt
-```
 1. A method for controlling an unmanned aerial vehicle (UAV), comprising:
 receiving a first signal from a remote controller;
 identifying a target location based on the first signal;
 calculating a flight path to the target location; and
 actuating a motor to propel the UAV along the flight path.
-```
 
 ### Function-Way-Result Analysis
-```json
-[
-  {
-    "component_name": "Receiving Signal",
-    "claim_text": "Claim 1: receiving a first signal from a remote controller;",
-    "claim_limitation": "Requires a signal from a remote controller to initiate operation",
-    "function": "Receive Signal",
-    "way": {
-      "physical_principle": "Electromagnetism",
-      "technical_mechanism": "Wireless Radio Communication",
-      "operational_parameter": "Signal Frequency and Modulation"
-    },
-    "result": "The UAV receives operational commands for navigation",
-    "equivalence_risk_notes": "A substantially the same way might involve a different communication protocol or frequency that achieves the same receipt of commands."
-  },
-  {
-    "component_name": "Identifying Target Location",
-    "claim_text": "Claim 1: identifying a target location based on the first signal;",
-    "claim_limitation": "Determines a destination based on received data",
-    "function": "Identify Location",
-    "way": {
-      "physical_principle": "Data Processing",
-      "technical_mechanism": "GPS Coordinates Extraction",
-      "operational_parameter": "Signal Content Analysis"
-    },
-    "result": "UAV determines its target destination",
-    "equivalence_risk_notes": "Using alternative location data extraction methods (e.g. triangulation from signal towers) could be substantially the same."
-  },
-  {
-    "component_name": "Calculating Flight Path",
-    "claim_text": "Claim 1: calculating a flight path to the target location;",
-    "claim_limitation": "Requires computation of travel route",
-    "function": "Calculate Flight Path",
-    "way": {
-      "physical_principle": "Algorithmic Computation",
-      "technical_mechanism": "Pathfinding Algorithm",
-      "operational_parameter": "Route Optimization Parameters"
-    },
-    "result": "Generation of a navigable route for the UAV",
-    "equivalence_risk_notes": "Similar pathfinding or optimization algorithms that achieve equivalent routing would be substitutes."
-  },
-  {
-    "component_name": "Actuating Motor",
-    "claim_text": "Claim 1: actuating a motor to propel the UAV along the flight path.",
-    "claim_limitation": "Initiates movement according to calculated path",
-    "function": "Propel UAV",
-    "way": {
-      "physical_principle": "Electromechanical Force",
-      "technical_mechanism": "DC Motor Actuation",
-      "operational_parameter": "Voltage and Current Control"
-    },
-    "result": "UAV propulsion along the defined path",
-    "equivalence_risk_notes": "A different motor type achieving the same propulsion (e.g., brushless motor) could be a known substitute."
-  }
-]
-```
+- **Component Name:** Receiving Signal
+  - **Claim Text:** Claim 1: A method for controlling an unmanned aerial vehicle (UAV), comprising: receiving a first signal from a remote controller;
+  - **Claim Limitation:** First signal from a remote controller
+  - **Function:** Receive Signal
+  - **Way:**
+    - **Physical Principle:** Electromagnetism
+    - **Technical Mechanism:** Wireless Communication
+    - **Operational Parameter:** Signal Frequency
+  - **Result:** Signal from the remote controller is obtained
+  - **Equivalence Risk Notes:** A known substitute could involve a different wireless protocol or frequency band but still achieve signal reception through electromagnetic principles.
+
+- **Component Name:** Identifying Target Location
+  - **Claim Text:** Claim 1: identifying a target location based on the first signal;
+  - **Claim Limitation:** Target location identification
+  - **Function:** Identify Target Location
+  - **Way:**
+    - **Physical Principle:** Mathematical Estimation
+    - **Technical Mechanism:** Signal Processing Algorithm
+    - **Operational Parameter:** Data Packet Analysis
+  - **Result:** Coordinates or reference point for navigation are established
+  - **Equivalence Risk Notes:** An equivalent could use an alternative algorithm with similar data input for location identification.
+
+- **Component Name:** Calculating Flight Path
+  - **Claim Text:** Claim 1: calculating a flight path to the target location;
+  - **Claim Limitation:** Flight path calculation to target
+  - **Function:** Calculate Flight Path
+  - **Way:**
+    - **Physical Principle:** Optimization
+    - **Technical Mechanism:** Pathfinding Algorithm
+    - **Operational Parameter:** Waypoint Sequencing
+  - **Result:** Optimal path to destination is computed
+  - **Equivalence Risk Notes:** Utilizing a different algorithm with the same input-output characteristics for path optimization would be a known alternative.
+
+- **Component Name:** Actuating Motor
+  - **Claim Text:** Claim 1: actuating a motor to propel the UAV along the flight path.
+  - **Claim Limitation:** Motor actuation for flight path propulsion
+  - **Function:** Actuate Motor
+  - **Way:**
+    - **Physical Principle:** Electrodynamics
+    - **Technical Mechanism:** Motor Control Circuit
+    - **Operational Parameter:** Voltage Regulation
+  - **Result:** UAV is propelled in accordance with the calculated path
+  - **Equivalence Risk Notes:** A substitute may involve a different type of motor or control circuit achieving flight propulsion through voltage control.
 Plan completed:
 
 The completed plan involved conducting a Patent Function-Way-Result Analysis for a method of controlling an unmanned aerial vehicle (UAV). The analysis was successfully completed with all steps finalized, achieving 100% progress.
 
-The analysis focused on breaking down the patent claim into four key components: Receiving Signal, Identifying Target Location, Calculating Flight Path, and Actuating Motor. Each component was examined for its function, the way it achieves that function, and the resulting outcome. The analysis also considered potential equivalence risks, identifying alternative methods or technologies that could achieve similar results.
+The analysis focused on four key components of the patent claim:
 
-Overall, the plan effectively dissected the patent claim to understand the underlying mechanisms and potential areas of equivalence, providing a comprehensive view of the UAV control method.
+1. **Receiving Signal**: This component involves receiving a signal from a remote controller using electromagnetic principles and wireless communication. The analysis identified potential equivalence risks with alternative wireless protocols or frequency bands.
+
+2. **Identifying Target Location**: This step involves using a signal processing algorithm to identify a target location based on the received signal. The analysis noted that different algorithms could achieve similar results, posing an equivalence risk.
+
+3. **Calculating Flight Path**: This component involves computing an optimal flight path using a pathfinding algorithm. The analysis highlighted that alternative algorithms with similar input-output characteristics could serve as equivalents.
+
+4. **Actuating Motor**: This involves using a motor control circuit to propel the UAV along the calculated path. The analysis pointed out that different motors or control circuits could achieve the same result through voltage regulation.
+
+Overall, the analysis provided a detailed breakdown of each component's function, the way it operates, and the resulting outcome, along with potential equivalence risks. This comprehensive analysis aids in understanding the patent's scope and potential vulnerabilities to alternative implementations.
 
 ========================================
 DETAILED STEP RESULTS
@@ -78,69 +71,54 @@ DETAILED STEP RESULTS
 
 ### Step 0 Output
 ### Content of claim_a.txt
-```
 1. A method for controlling an unmanned aerial vehicle (UAV), comprising:
 receiving a first signal from a remote controller;
 identifying a target location based on the first signal;
 calculating a flight path to the target location; and
 actuating a motor to propel the UAV along the flight path.
-```
 
 ### Function-Way-Result Analysis
-```json
-[
-  {
-    "component_name": "Receiving Signal",
-    "claim_text": "Claim 1: receiving a first signal from a remote controller;",
-    "claim_limitation": "Requires a signal from a remote controller to initiate operation",
-    "function": "Receive Signal",
-    "way": {
-      "physical_principle": "Electromagnetism",
-      "technical_mechanism": "Wireless Radio Communication",
-      "operational_parameter": "Signal Frequency and Modulation"
-    },
-    "result": "The UAV receives operational commands for navigation",
-    "equivalence_risk_notes": "A substantially the same way might involve a different communication protocol or frequency that achieves the same receipt of commands."
-  },
-  {
-    "component_name": "Identifying Target Location",
-    "claim_text": "Claim 1: identifying a target location based on the first signal;",
-    "claim_limitation": "Determines a destination based on received data",
-    "function": "Identify Location",
-    "way": {
-      "physical_principle": "Data Processing",
-      "technical_mechanism": "GPS Coordinates Extraction",
-      "operational_parameter": "Signal Content Analysis"
-    },
-    "result": "UAV determines its target destination",
-    "equivalence_risk_notes": "Using alternative location data extraction methods (e.g. triangulation from signal towers) could be substantially the same."
-  },
-  {
-    "component_name": "Calculating Flight Path",
-    "claim_text": "Claim 1: calculating a flight path to the target location;",
-    "claim_limitation": "Requires computation of travel route",
-    "function": "Calculate Flight Path",
-    "way": {
-      "physical_principle": "Algorithmic Computation",
-      "technical_mechanism": "Pathfinding Algorithm",
-      "operational_parameter": "Route Optimization Parameters"
-    },
-    "result": "Generation of a navigable route for the UAV",
-    "equivalence_risk_notes": "Similar pathfinding or optimization algorithms that achieve equivalent routing would be substitutes."
-  },
-  {
-    "component_name": "Actuating Motor",
-    "claim_text": "Claim 1: actuating a motor to propel the UAV along the flight path.",
-    "claim_limitation": "Initiates movement according to calculated path",
-    "function": "Propel UAV",
-    "way": {
-      "physical_principle": "Electromechanical Force",
-      "technical_mechanism": "DC Motor Actuation",
-      "operational_parameter": "Voltage and Current Control"
-    },
-    "result": "UAV propulsion along the defined path",
-    "equivalence_risk_notes": "A different motor type achieving the same propulsion (e.g., brushless motor) could be a known substitute."
-  }
-]
-```
+- **Component Name:** Receiving Signal
+  - **Claim Text:** Claim 1: A method for controlling an unmanned aerial vehicle (UAV), comprising: receiving a first signal from a remote controller;
+  - **Claim Limitation:** First signal from a remote controller
+  - **Function:** Receive Signal
+  - **Way:**
+    - **Physical Principle:** Electromagnetism
+    - **Technical Mechanism:** Wireless Communication
+    - **Operational Parameter:** Signal Frequency
+  - **Result:** Signal from the remote controller is obtained
+  - **Equivalence Risk Notes:** A known substitute could involve a different wireless protocol or frequency band but still achieve signal reception through electromagnetic principles.
+
+- **Component Name:** Identifying Target Location
+  - **Claim Text:** Claim 1: identifying a target location based on the first signal;
+  - **Claim Limitation:** Target location identification
+  - **Function:** Identify Target Location
+  - **Way:**
+    - **Physical Principle:** Mathematical Estimation
+    - **Technical Mechanism:** Signal Processing Algorithm
+    - **Operational Parameter:** Data Packet Analysis
+  - **Result:** Coordinates or reference point for navigation are established
+  - **Equivalence Risk Notes:** An equivalent could use an alternative algorithm with similar data input for location identification.
+
+- **Component Name:** Calculating Flight Path
+  - **Claim Text:** Claim 1: calculating a flight path to the target location;
+  - **Claim Limitation:** Flight path calculation to target
+  - **Function:** Calculate Flight Path
+  - **Way:**
+    - **Physical Principle:** Optimization
+    - **Technical Mechanism:** Pathfinding Algorithm
+    - **Operational Parameter:** Waypoint Sequencing
+  - **Result:** Optimal path to destination is computed
+  - **Equivalence Risk Notes:** Utilizing a different algorithm with the same input-output characteristics for path optimization would be a known alternative.
+
+- **Component Name:** Actuating Motor
+  - **Claim Text:** Claim 1: actuating a motor to propel the UAV along the flight path.
+  - **Claim Limitation:** Motor actuation for flight path propulsion
+  - **Function:** Actuate Motor
+  - **Way:**
+    - **Physical Principle:** Electrodynamics
+    - **Technical Mechanism:** Motor Control Circuit
+    - **Operational Parameter:** Voltage Regulation
+  - **Result:** UAV is propelled in accordance with the calculated path
+  - **Equivalence Risk Notes:** A substitute may involve a different type of motor or control circuit achieving flight propulsion through voltage control.
 
